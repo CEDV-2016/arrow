@@ -1,0 +1,8 @@
+PhysicsGame
+obj/*
+*.o
+*~
+*.log
+blender/*.blend1
+*.scene
+core

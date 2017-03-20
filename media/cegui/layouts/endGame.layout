@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Vanilla/FrameWindow" name="winWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{0.3,467},{0.3,76}}" />
+        <Property name="AspectRatio" value="1.8" />
+        <Property name="VerticalAlignment" value="Centre" />
+        <Property name="HorizontalAlignment" value="Centre" />
+        <Window type="Vanilla/Label" name="winLabel" >
+            <Property name="Area" value="{{0,0},{0,-78},{0,838},{0,26}}" />
+            <Property name="Font" value="Jura-45" />
+            <Property name="Text" value="¡Has ganado!" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="nameLabel" >
+            <Property name="Area" value="{{0,0},{0,0},{0,234},{0,50}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="User" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Label" name="pointsLabel" >
+            <Property name="Area" value="{{0,0},{0,50},{0,194},{0,100}}" />
+            <Property name="Font" value="Jura-25" />
+            <Property name="Text" value="100" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Button" name="endWinButton" >
+            <Property name="Area" value="{{0,0},{0,0},{0,126},{0,50}}" />
+            <Property name="Font" value="Jura-18" />
+            <Property name="Text" value="Fin" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="HorizontalAlignment" value="Right" />
+        </Window>
+    </Window>
+</GUILayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="MainWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="VerticalAlignment" value="Centre" />
+        <Property name="HorizontalAlignment" value="Centre" />
+        <Window type="Vanilla/Button" name="NewButton" >
+            <Property name="Area" value="{{0,0},{0,-156},{0,1036},{0,-52}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Nuevo Juego" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Button" name="RankingButton" >
+            <Property name="Area" value="{{0,0},{0,-52},{0,884},{0,52}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Ranking" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Button" name="CreditsButton" >
+            <Property name="Area" value="{{0,0},{0,52},{0,690},{0,156}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Creditos" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+        <Window type="Vanilla/Button" name="ExitButton" >
+            <Property name="Area" value="{{0,0},{0,156},{0,698},{0,260}}" />
+            <Property name="Font" value="Jura-50" />
+            <Property name="Text" value="Salir" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
+    </Window>
+</GUILayout>
