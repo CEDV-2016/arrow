@@ -114,8 +114,8 @@ void PlayState::createScene()
   // TODO Migrate the creation of the maps to a MapManager (and make it fade to black)
   // TODO Delegate all the gameplay's logic to a GameManager (rename GameManager to GameStateManager?)
 
-  Map * main_map;
-  main_map = new DesertMap(_sceneMgr);
+  std::shared_ptr<Map> main_map;
+  main_map = std::shared_ptr<Map>( new DesertMap(_sceneMgr) );
   main_map->create();
 
   //Creating the player

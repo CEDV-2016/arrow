@@ -4,25 +4,15 @@ DIRSRC := src/
 DIROBJ := obj/
 DIRHEA := include/
 
-DIRSRC_STATES := $(DIRSRC)states/
-DIRHEA_STATES := $(DIRHEA)states/
-
-DIRSRC_MANAGERS := $(DIRSRC)managers/
-DIRHEA_MANAGERS := $(DIRHEA)managers/
-
-DIRSRC_ENTITIES := $(DIRSRC)entities/
-DIRHEA_ENTITIES := $(DIRHEA)entities/
-
-DIRSRC_MAPS := $(DIRSRC)maps/
-DIRHEA_MAPS := $(DIRHEA)maps/
+SUBDIRHEA := $(shell ls -p $(DIRHEA) | grep /)
 
 CXX := g++
 
 # Compiling flags --------------------------------------------------------------
-CXXFLAGS := -I$(DIRHEA) -I$(DIRHEA_STATES) -I$(DIRHEA_MANAGERS) -I$(DIRHEA_ENTITIES) -I$(DIRHEA_MAPS)
+CXXFLAGS := $(addprefix -I$(DIRHEA), $(SUBDIRHEA))
 CXXFLAGS += -Wall -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0 `pkg-config --cflags OGRE OGRE-Overlay` -std=c++11 `pkg-config --cflags OIS`
 
-# Flags del linker ---------------------------------------------------
+# Linker flags -----------------------------------------------------------------
 LDFLAGS := `pkg-config --libs-only-L OGRE` -lOIS -lGL -lstdc++ -lboost_system  -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 LDLIBS := `pkg-config --libs-only-l OGRE OGRE-Overlay SDL2_mixer` -lboost_system -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 
@@ -34,11 +24,9 @@ else
 	mode := debug
 endif
 
-OBJS := $(subst $(DIRSRC), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard $(DIRSRC)*.cpp)))
-OBJS += $(subst $(DIRSRC_STATES), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard $(DIRSRC_STATES)*.cpp)))
-OBJS += $(subst $(DIRSRC_MANAGERS), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard $(DIRSRC_MANAGERS)*.cpp)))
-OBJS += $(subst $(DIRSRC_ENTITIES), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard $(DIRSRC_ENTITIES)*.cpp)))
-OBJS += $(subst $(DIRSRC_MAPS), $(DIROBJ), $(patsubst %.cpp, %.o, $(wildcard $(DIRSRC_MAPS)*.cpp)))
+ALL_CPP := $(shell find $(DIRSRC)* -name "*.cpp" -exec basename {} \;)
+ALL_OBJ := $(patsubst %.cpp, %.o, $(ALL_CPP))
+OBJS    := $(addprefix $(DIROBJ), $(ALL_OBJ))
 
 .PHONY: all clean
 
@@ -58,27 +46,13 @@ $(EXEC): $(OBJS)
 	@$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 # Compiling --------------------------------------------------------------------
+# Main
 $(DIROBJ)%.o: $(DIRSRC)%.cpp
 	@echo "Compiling $<..."
 	@$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDLIBS)
 
-# States
-$(DIROBJ)%.o: $(DIRSRC_STATES)%.cpp
-	@echo "Compiling $<..."
-	@$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDLIBS)
-
-# Managers
-$(DIROBJ)%.o: $(DIRSRC_MANAGERS)%.cpp
-	@echo "Compiling $<..."
-	@$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDLIBS)
-
-# Entities
-$(DIROBJ)%.o: $(DIRSRC_ENTITIES)%.cpp
-	@echo "Compiling $<..."
-	@$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDLIBS)
-
-# Maps
-$(DIROBJ)%.o: $(DIRSRC_MAPS)%.cpp
+# Subdirectories
+$(DIROBJ)%.o: $(DIRSRC)*/*%.cpp
 	@echo "Compiling $<..."
 	@$(CXX) $(CXXFLAGS) -c $< -o $@ $(LDLIBS)
 
