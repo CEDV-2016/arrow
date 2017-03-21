@@ -43,8 +43,8 @@ GameManager::start
   _inputMgr = new InputManager;
   _inputMgr->initialise(_renderWindow);
 
-  _mainTrack = _trackManager->load("funky_element.ogg");
-  _mainTrack->play();
+  // _mainTrack = _trackManager->load("funky_element.ogg");
+  // _mainTrack->play();
 
   // Registro como key y mouse listener...
   _inputMgr->addKeyListener(this, "GameManager");
