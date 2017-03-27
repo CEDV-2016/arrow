@@ -3,6 +3,7 @@
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
 #include "DesertMap.hpp"
+
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
 PlayState::PlayState()
@@ -18,6 +19,7 @@ PlayState::enter ()
 
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
+  _mapManager = new MapManager(_sceneMgr);
   createScene();
   // createGUI();
 
@@ -27,6 +29,7 @@ PlayState::enter ()
 void
 PlayState::exit ()
 {
+  _mapManager->destroyAllMaps();
   _playGUI->hide();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
@@ -111,12 +114,9 @@ PlayState::getSingleton ()
 
 void PlayState::createScene()
 {
-  // TODO Migrate the creation of the maps to a MapManager (and make it fade to black)
   // TODO Delegate all the gameplay's logic to a GameManager (rename GameManager to GameStateManager?)
 
-  std::shared_ptr<Map> main_map;
-  main_map = std::shared_ptr<Map>( new DesertMap(_sceneMgr) );
-  main_map->create();
+  _mapManager->changeMap(MapsEnum::DESERT);
 
   //Creating the player
   Ogre::Entity * entity = _sceneMgr->createEntity("Player.mesh");

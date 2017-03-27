@@ -10,6 +10,7 @@
 
 #include "Game.hpp"
 #include "GameState.hpp"
+#include "MapManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -56,6 +57,7 @@ protected:
   OIS::Mouse* _mouse;
   CEGUI::Window* _playGUI, *_nameView, *_scoreView, *_life1View, *_life2View, *_life3View;
   Game *_game;
+  MapManager * _mapManager;
   std::string _name;
 
   bool _exitGame;

@@ -1,5 +1,7 @@
 #include "DesertMap.hpp"
 
+#include <iostream>
+
 DesertMap::DesertMap(Ogre::SceneManager * sceneMgr) : _sceneMgr(sceneMgr) { }
 
 DesertMap::~DesertMap() {}
@@ -27,4 +29,5 @@ void DesertMap::create()
 
 void DesertMap::destroy()
 {
+  std::cout << "Destroying desert map...\n";
 }

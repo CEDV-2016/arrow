@@ -6,7 +6,7 @@ class DesertMap : public Map
 {
 public:
   DesertMap(Ogre::SceneManager * sceneMgr);
-  ~DesertMap();
+  ~DesertMap(); 
 
   void create();
   void destroy();

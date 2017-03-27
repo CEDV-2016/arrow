@@ -6,3 +6,4 @@ obj/*
 blender/*.blend1
 *.scene
 core
+*.gch
