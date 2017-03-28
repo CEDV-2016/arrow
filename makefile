@@ -31,8 +31,8 @@ OBJS    := $(addprefix $(DIROBJ), $(ALL_OBJ))
 .PHONY: all clean
 
 all: dir $(EXEC)
-	# ./$(EXEC)
-	gdb -ex run ./$(EXEC)
+	./$(EXEC)
+	# gdb -ex run ./$(EXEC)
 
 info:
 	@echo '------------------------------------------------------'

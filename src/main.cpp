@@ -1,4 +1,4 @@
-#include "GameManager.hpp"
+#include "GameStatesManager.hpp"
 #include "IntroState.hpp"
 #include "MainState.hpp"
 #include "NewGameState.hpp"
@@ -12,7 +12,7 @@
 
 int main () {
 
-  GameManager* game = new GameManager();
+  GameStatesManager* game = new GameStatesManager();
   new IntroState();
   new MainState();
   new NewGameState();

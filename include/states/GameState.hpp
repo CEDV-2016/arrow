@@ -3,7 +3,7 @@
 #include <Ogre.h>
 #include <OIS/OIS.h>
 
-#include "GameManager.hpp"
+#include "GameStatesManager.hpp"
 #include "InputManager.hpp"
 
 // Clase abstracta de estado básico.
@@ -38,16 +38,16 @@ class GameState {
 
   // Gestión básica de transiciones.
   void changeState (GameState* state) {
-    GameManager::getSingletonPtr()->changeState(state);
+    GameStatesManager::getSingletonPtr()->changeState(state);
   }
   void pushState (GameState* state) {
-    GameManager::getSingletonPtr()->pushState(state);
+    GameStatesManager::getSingletonPtr()->pushState(state);
   }
   void popState () {
-    GameManager::getSingletonPtr()->popState();
+    GameStatesManager::getSingletonPtr()->popState();
   }
 
   void restartState (GameState* state) {
-    GameManager::getSingletonPtr()->restartState(state);
+    GameStatesManager::getSingletonPtr()->restartState(state);
   }
 };

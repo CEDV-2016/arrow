@@ -8,13 +8,10 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
   _currentMap = MapsEnum::NONE;
 
   initMaps();
-  std::cout << _currentMap << "----------------------------------------------------------------------------------\n";
-
 }
 
 void MapManager::initMaps()
 {
-  std::cout << "Intialising\n";
   _maps[MapsEnum::DESERT] = MapPtr( new DesertMap( _sceneMgr ) );
   // Here will go the rest of the maps the game is using
 }

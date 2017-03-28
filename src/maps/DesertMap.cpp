@@ -29,5 +29,6 @@ void DesertMap::create()
 
 void DesertMap::destroy()
 {
+  // TODO
   std::cout << "Destroying desert map...\n";
 }

@@ -114,7 +114,7 @@ PlayState::getSingleton ()
 
 void PlayState::createScene()
 {
-  // TODO Delegate all the gameplay's logic to a GameManager (rename GameManager to GameStateManager?)
+  // TODO Delegate all the gameplay's logic to a GameplayManager
 
   _mapManager->changeMap(MapsEnum::DESERT);
 

@@ -17,11 +17,11 @@
 
 class GameState;
 
-class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManager>, public OIS::KeyListener, public OIS::MouseListener
+class GameStatesManager : public Ogre::FrameListener, public Ogre::Singleton<GameStatesManager>, public OIS::KeyListener, public OIS::MouseListener
 {
  public:
-  GameManager ();
-  ~GameManager (); // Limpieza de todos los estados.
+  GameStatesManager ();
+  ~GameStatesManager (); // Limpieza de todos los estados.
 
   // Para el estado inicial.
   void start (GameState* state);
@@ -33,8 +33,8 @@ class GameManager : public Ogre::FrameListener, public Ogre::Singleton<GameManag
   void restartState (GameState* state);
 
   // Heredados de Ogre::Singleton.
-  static GameManager& getSingleton ();
-  static GameManager* getSingletonPtr ();
+  static GameStatesManager& getSingleton ();
+  static GameStatesManager* getSingletonPtr ();
 
  protected:
   Ogre::Root* _root;

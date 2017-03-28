@@ -1,16 +1,16 @@
 #include <Ogre.h>
 
-#include "GameManager.hpp"
+#include "GameStatesManager.hpp"
 #include "GameState.hpp"
 
-template<> GameManager* Ogre::Singleton<GameManager>::msSingleton = 0;
+template<> GameStatesManager* Ogre::Singleton<GameStatesManager>::msSingleton = 0;
 
-GameManager::GameManager ()
+GameStatesManager::GameStatesManager ()
 {
   _root = 0;
 }
 
-GameManager::~GameManager ()
+GameStatesManager::~GameStatesManager ()
 {
   while (!_states.empty()) {
     _states.top()->exit();
@@ -25,7 +25,7 @@ GameManager::~GameManager ()
 }
 
 void
-GameManager::start
+GameStatesManager::start
 (GameState* state)
 {
   // Creación del objeto Ogre::Root.
@@ -47,10 +47,10 @@ GameManager::start
   // _mainTrack->play();
 
   // Registro como key y mouse listener...
-  _inputMgr->addKeyListener(this, "GameManager");
-  _inputMgr->addMouseListener(this, "GameManager");
+  _inputMgr->addKeyListener(this, "GameStatesManager");
+  _inputMgr->addMouseListener(this, "GameStatesManager");
 
-  // El GameManager es un FrameListener.
+  // El GameStatesManager es un FrameListener.
   _root->addFrameListener(this);
 
   //CEGUI
@@ -82,7 +82,7 @@ GameManager::start
 }
 
 void
-GameManager::changeState
+GameStatesManager::changeState
 (GameState* state)
 {
   // Limpieza del estado actual.
@@ -100,7 +100,7 @@ GameManager::changeState
 }
 
 void
-GameManager::pushState
+GameStatesManager::pushState
 (GameState* state)
 {
   // Pausa del estado actual.
@@ -114,7 +114,7 @@ GameManager::pushState
 }
 
 void
-GameManager::popState ()
+GameStatesManager::popState ()
 {
   // Limpieza del estado actual.
   if (!_states.empty()) {
@@ -128,7 +128,7 @@ GameManager::popState ()
 }
 
 void
-GameManager::restartState
+GameStatesManager::restartState
 (GameState* state)
 {
   // Limpieza de la pila
@@ -144,7 +144,7 @@ GameManager::restartState
 }
 
 void
-GameManager::loadResources ()
+GameStatesManager::loadResources ()
 {
   Ogre::ConfigFile cf;
   cf.load("resources.cfg");
@@ -164,7 +164,7 @@ GameManager::loadResources ()
 }
 
 bool
-GameManager::configure ()
+GameStatesManager::configure ()
 {
   if (!_root->restoreConfig()) {
     if (!_root->showConfigDialog()) {
@@ -179,14 +179,14 @@ GameManager::configure ()
   return true;
 }
 
-GameManager*
-GameManager::getSingletonPtr ()
+GameStatesManager*
+GameStatesManager::getSingletonPtr ()
 {
   return msSingleton;
 }
 
-GameManager&
-GameManager::getSingleton ()
+GameStatesManager&
+GameStatesManager::getSingleton ()
 {
   assert(msSingleton);
   return *msSingleton;
@@ -195,7 +195,7 @@ GameManager::getSingleton ()
 // Las siguientes funciones miembro delegan
 // el evento en el estado actual.
 bool
-GameManager::frameStarted
+GameStatesManager::frameStarted
 (const Ogre::FrameEvent& evt)
 {
   _inputMgr->capture();
@@ -203,14 +203,14 @@ GameManager::frameStarted
 }
 
 bool
-GameManager::frameEnded
+GameStatesManager::frameEnded
 (const Ogre::FrameEvent& evt)
 {
   return _states.top()->frameEnded(evt);
 }
 
 bool
-GameManager::keyPressed
+GameStatesManager::keyPressed
 (const OIS::KeyEvent &e)
 {
   _states.top()->keyPressed(e);
@@ -218,7 +218,7 @@ GameManager::keyPressed
 }
 
 bool
-GameManager::keyReleased
+GameStatesManager::keyReleased
 (const OIS::KeyEvent &e)
 {
   _states.top()->keyReleased(e);
@@ -226,7 +226,7 @@ GameManager::keyReleased
 }
 
 bool
-GameManager::mouseMoved
+GameStatesManager::mouseMoved
 (const OIS::MouseEvent &e)
 {
   _states.top()->mouseMoved(e);
@@ -234,7 +234,7 @@ GameManager::mouseMoved
 }
 
 bool
-GameManager::mousePressed
+GameStatesManager::mousePressed
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mousePressed(e, id);
@@ -242,7 +242,7 @@ GameManager::mousePressed
 }
 
 bool
-GameManager::mouseReleased
+GameStatesManager::mouseReleased
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   _states.top()->mouseReleased(e, id);
@@ -250,7 +250,7 @@ GameManager::mouseReleased
 }
 
 bool
-GameManager::initSDL () {
+GameStatesManager::initSDL () {
   if (SDL_Init(SDL_INIT_AUDIO) < 0)
   {
     return false;
