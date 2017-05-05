@@ -8,31 +8,31 @@
         <Window type="Vanilla/Label" name="Create" >
             <Property name="Area" value="{{0,0},{0,-200},{0.0929687,848},{0,-72}}" />
             <Property name="Font" value="Jura-50" />
-            <Property name="Text" value="Creado por" />
+            <Property name="Text" value="[colour='FF000000']Desarrollado por" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="Pedro" >
             <Property name="Area" value="{{0,0},{0,0},{0.842187,128},{0,104}}" />
-            <Property name="Font" value="Jura-25" />
-            <Property name="Text" value="Pedro Manuel Gómez-Portillo López" />
+            <Property name="Font" value="Jura-35" />
+            <Property name="Text" value="[colour='FF000000']Pedro Manuel Gomez-Portillo Lopez" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Label" name="JJ" >
             <Property name="Area" value="{{0,0},{0,104},{0,1612},{0,208}}" />
-            <Property name="Font" value="Jura-25" />
-            <Property name="Text" value="José Juan Ramirez de Arellano Díaz Miguel" />
+            <Property name="Font" value="Jura-35" />
+            <Property name="Text" value="[colour='FF000000']Jose Juan Ramirez de Arellano Diaz Miguel" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="BackButton" >
             <Property name="Area" value="{{0,40},{0,-40},{0,324},{0,64}}" />
-            <Property name="Font" value="Jura-25" />
-            <Property name="Text" value="Volver" />
+            <Property name="Font" value="Jura-30" />
+            <Property name="Text" value="[colour='FF000000']Atras" />
             <Property name="VerticalAlignment" value="Bottom" />
         </Window>
     </Window>

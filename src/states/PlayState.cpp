@@ -20,6 +20,11 @@ PlayState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   _mapManager = new MapManager(_sceneMgr);
+
+  _sceneMgr->clearScene(); //deleting background image
+  _sceneMgr->getCamera("MainCamera")->setPosition( Ogre::Vector3(-12, 10, 12) );
+  _sceneMgr->getCamera("MainCamera")->lookAt( Ogre::Vector3(-5, 5, -9) );
+
   createScene();
   // createGUI();
 

@@ -46,6 +46,8 @@ private:
   Ogre::SceneManager* _sceneManager;
   Ogre::RaySceneQuery *_raySceneQuery;
   Ogre::SceneNode *_selectedNode;
+
+
   CEGUI::OgreRenderer* renderer;
   OIS::InputManager* _inputManager;
   OIS::Keyboard* _keyboard;

@@ -34,8 +34,8 @@ class IntroState : public Ogre::Singleton<IntroState>, public GameState
   static IntroState& getSingleton ();
   static IntroState* getSingletonPtr ();
 
-  void createScene();
   void createGUI();
+  void loadBackgroundImage();
 
  protected:
   Ogre::Root* _root;
@@ -49,6 +49,9 @@ class IntroState : public Ogre::Singleton<IntroState>, public GameState
   OIS::Keyboard* _keyboard;
   OIS::Mouse* _mouse;
   CEGUI::Window* _intro;
+
+  Ogre::SceneNode *_backgroundNode;
+  Ogre::Rectangle2D *_rect;
 
   bool _exitGame;
 };

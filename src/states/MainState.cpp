@@ -88,6 +88,7 @@ void MainState::createGUI()
   }
 }
 
+
 bool MainState::newGame(const CEGUI::EventArgs &e)
 {
   pushState(NewGameState::getSingletonPtr());
