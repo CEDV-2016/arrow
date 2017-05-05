@@ -6,22 +6,26 @@ template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 void
 IntroState::enter ()
 {
-  if (_root == NULL) {
+  if (_root == NULL)
+  {
     _root = Ogre::Root::getSingletonPtr();
   }
-  if (_sceneMgr == NULL) {
+  if (_sceneMgr == NULL)
+  {
     _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
   }
-  if (_camera == NULL) {
+  if (_camera == NULL)
+  {
     _camera = _sceneMgr->createCamera("MainCamera");
   }
 
   _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
-  _viewport->setBackgroundColour(Ogre::ColourValue(0.9, 0.7, 0.7));
+  _viewport->setBackgroundColour(Ogre::ColourValue(0.3, 0.8, 0.8));
 
   // Creating and placing camera
-  _camera->setPosition(Ogre::Vector3(0, 10, 10)); //X Z -Y
-  _camera->lookAt(Ogre::Vector3::ZERO);
+  _camera->setPosition(Ogre::Vector3(-12, 12, 12)); //X Z -Y
+  // _camera->lookAt( Ogre::Vector3::ZERO );
+  _camera->lookAt( Ogre::Vector3(-5, 5, -9) );
   _camera->setNearClipDistance(1);
   _camera->setFarClipDistance(1000);
   _camera->setFOVy(Ogre::Degree(38));

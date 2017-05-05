@@ -4,12 +4,12 @@
 #include <vector>
 
 #include "Map.hpp"
-#include "DesertMap.hpp"
+#include "RoomMap.hpp"
 
 enum MapsEnum
 {
   NONE = -1,
-  DESERT
+  ROOM,
 };
 
 class MapManager : public Ogre::Singleton<MapManager>

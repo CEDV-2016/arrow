@@ -32,7 +32,9 @@ OBJS    := $(addprefix $(DIROBJ), $(ALL_OBJ))
 
 all: dir $(EXEC)
 	./$(EXEC)
-	# gdb -ex run ./$(EXEC)
+
+debug: dir $(EXEC)
+	gdb -ex run ./$(EXEC)
 
 info:
 	@echo '------------------------------------------------------'

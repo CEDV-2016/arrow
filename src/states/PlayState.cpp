@@ -2,7 +2,7 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
-#include "DesertMap.hpp"
+#include "RoomMap.hpp"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -116,7 +116,7 @@ void PlayState::createScene()
 {
   // TODO Delegate all the gameplay's logic to a GameplayManager
 
-  _mapManager->changeMap(MapsEnum::DESERT);
+  _mapManager->changeMap( MapsEnum::ROOM );
 
   //Creating the player
   Ogre::Entity * entity = _sceneMgr->createEntity("Player.mesh");

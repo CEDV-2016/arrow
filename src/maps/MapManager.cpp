@@ -12,16 +12,16 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
 
 void MapManager::initMaps()
 {
-  _maps[MapsEnum::DESERT] = MapPtr( new DesertMap( _sceneMgr ) );
+  _maps[ MapsEnum::ROOM ] = MapPtr( new RoomMap( _sceneMgr ) );
   // Here will go the rest of the maps the game is using
 }
 
 // TODO implement a fade to black on changing map
 void MapManager::changeMap(MapsEnum newMap)
 {
-  if (_currentMap != MapsEnum::NONE) _maps[_currentMap]->destroy();
+  if ( _currentMap != MapsEnum::NONE ) _maps[ _currentMap ]->destroy();
 
-  _maps[newMap]->create();
+  _maps[ newMap ]->create();
 
   _currentMap = newMap;
 }
