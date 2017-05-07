@@ -1,7 +1,11 @@
 #pragma once
 
-#include <Ogre.h>
 #include <vector>
+
+#include <Ogre.h>
+#include <OgreBulletDynamicsRigidBody.h>
+#include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
+#include <Shapes/OgreBulletCollisionsBoxShape.h>
 
 #include "Map.hpp"
 #include "RoomMap.hpp"
@@ -33,6 +37,8 @@ private:
   MapsEnum _currentMap;
 
   Ogre::SceneManager * _sceneMgr;
+
+  OgreBulletDynamics::DynamicsWorld * _world;
 
   void initMaps();
 };

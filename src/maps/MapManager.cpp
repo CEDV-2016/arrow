@@ -7,12 +7,23 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
   _sceneMgr = sceneMgr;
   _currentMap = MapsEnum::NONE;
 
+  Ogre::AxisAlignedBox worldBounds = Ogre::AxisAlignedBox ( Ogre::Vector3 (-100, -100, -100), Ogre::Vector3 (100,  100,  100));
+  Ogre::Vector3 gravity = Ogre::Vector3( 0, -9.8, 0 );
+  _world = new OgreBulletDynamics::DynamicsWorld( _sceneMgr, worldBounds, gravity );
+
   initMaps();
+}
+
+MapManager::~MapManager()
+{
+  destroyAllMaps();
+  _sceneMgr = nullptr;
+  _world = nullptr;
 }
 
 void MapManager::initMaps()
 {
-  _maps[ MapsEnum::ROOM ] = MapPtr( new RoomMap( _sceneMgr ) );
+  _maps[ MapsEnum::ROOM ] = MapPtr( new RoomMap( _sceneMgr, _world ) );
   // Here will go the rest of the maps the game is using
 }
 
@@ -35,5 +46,4 @@ void MapManager::destroyAllMaps()
     key = it->first;
     _maps[ key ]->destroy();
   }
-  _sceneMgr = nullptr;
 }

@@ -10,11 +10,11 @@ CXX := g++
 
 # Compiling flags --------------------------------------------------------------
 CXXFLAGS := $(addprefix -I$(DIRHEA), $(SUBDIRHEA))
-CXXFLAGS += -Wall -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0 `pkg-config --cflags OGRE OGRE-Overlay` -std=c++11 `pkg-config --cflags OIS`
+CXXFLAGS += -Wall -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0 `pkg-config --cflags OGRE OGRE-Overlay OgreBullet bullet` -std=c++11 `pkg-config --cflags OIS`
 
 # Linker flags -----------------------------------------------------------------
 LDFLAGS := `pkg-config --libs-only-L OGRE` -lOIS -lGL -lstdc++ -lboost_system  -lCEGUIBase-0 -lCEGUIOgreRenderer-0
-LDLIBS := `pkg-config --libs-only-l OGRE OGRE-Overlay SDL2_mixer` -lboost_system -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lCEGUIOgreRenderer-0
+LDLIBS := `pkg-config --libs-only-l OGRE OGRE-Overlay OgreBullet bullet SDL2_mixer` -lboost_system -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 
 # Compiling mode (-mode=release -mode=debug) -----------------------------------
 ifeq ($(mode), release)
@@ -67,4 +67,4 @@ dir:
 	@mkdir -p obj/
 
 edit:
-	atom .
+	atom .&
