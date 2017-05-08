@@ -39,6 +39,7 @@ private:
   Ogre::SceneManager * _sceneMgr;
 
   OgreBulletDynamics::DynamicsWorld * _world;
+  OgreBulletCollisions::DebugDrawer * _debugDrawer;
 
   void initMaps();
 };
