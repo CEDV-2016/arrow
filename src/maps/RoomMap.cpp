@@ -42,8 +42,19 @@ void RoomMap::create()
                                     // Restitucion, friccion y masa
   rigidTrack->setShape( room_node, trackTrimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
 
-  // delete trimeshConverter;
 
+  // Bola de prueba
+  Ogre::Entity *entity = _sceneMgr->createEntity("balldeprueba", "ball.mesh");
+  Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
+  node->attachObject(entity);
+  node->scale( Ogre::Vector3(0.5, 0.5, 0.5) );
+  // _sceneMgr->getRootSceneNode()->addChild( node );
+
+  OgreBulletCollisions::SphereCollisionShape *ballShape = new OgreBulletCollisions::SphereCollisionShape( 0.5 );
+  OgreBulletDynamics::RigidBody *rigidBall = new OgreBulletDynamics::RigidBody("balldeprueba", _world);
+
+  Ogre::Vector3 pos = Ogre::Vector3(-8.5, 10, -8.7);
+  rigidBall->setShape(node, ballShape, 0.05, 0.05, 0.3, pos, Ogre::Quaternion::IDENTITY);
 }
 
 void RoomMap::destroy()

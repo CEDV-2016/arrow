@@ -17,6 +17,7 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
   node->attachObject(static_cast <Ogre::SimpleRenderable *>( _debugDrawer ));
 
   _world->setDebugDrawer (_debugDrawer);
+  _world->setShowDebugShapes (true); // to paint green wires around physic bodies
 
   initMaps();
 }
@@ -24,14 +25,21 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
 MapManager::~MapManager()
 {
   destroyAllMaps();
+  delete _debugDrawer;
+  delete _world;
+
   _sceneMgr = nullptr;
-  _world = nullptr;
 }
 
 void MapManager::initMaps()
 {
   _maps[ MapsEnum::ROOM ] = MapPtr( new RoomMap( _sceneMgr, _world ) );
-  // Here will go the rest of the maps the game is using
+  // Here will go the declaration of the rest of the maps the game is using
+}
+
+void MapManager::stepSimulation(Ogre::Real deltaT)
+{
+  _world->stepSimulation( deltaT );
 }
 
 // TODO implement a fade to black on changing map

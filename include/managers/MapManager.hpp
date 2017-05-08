@@ -26,6 +26,7 @@ public:
 
   void changeMap(MapsEnum id);
   void destroyAllMaps();
+  void stepSimulation(Ogre::Real deltaT);
 
   // Inherited from Ogre::Singleton.
   static MapManager& getSingleton ();

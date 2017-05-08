@@ -13,8 +13,6 @@ CXXFLAGS := $(addprefix -I$(DIRHEA), $(SUBDIRHEA))
 CXXFLAGS += -Wall -std=c++11 -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0 `pkg-config --cflags OGRE OGRE-Overlay OgreBullet bullet OIS`
 
 # Linker flags -----------------------------------------------------------------
-# LDFLAGS := `pkg-config --libs-only-L OGRE` -lOIS -lGL -lstdc++ -lboost_system  -lCEGUIBase-0 -lCEGUIOgreRenderer-0
-# LDLIBS := `pkg-config --libs-only-l OGRE OGRE-Overlay OgreBullet bullet SDL2_mixer` -lboost_system -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lCEGUIOgreRenderer-0
 LDFLAGS := `pkg-config --libs-only-L OGRE` -lstdc++
 LDLIBS := `pkg-config --libs-only-l OgreBullet OGRE OGRE-Overlay bullet SDL2_mixer` -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lboost_system -lCEGUIOgreRenderer-0
 

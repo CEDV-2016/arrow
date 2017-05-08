@@ -56,6 +56,8 @@ PlayState::frameStarted
 {
   Ogre::Real deltaT = evt.timeSinceLastFrame;
 
+  _mapManager->stepSimulation( deltaT );
+
   return true;
 }
 
