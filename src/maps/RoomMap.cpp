@@ -16,7 +16,7 @@ void RoomMap::create()
   // Creating light
   Ogre::Light *light = _sceneMgr->createLight("MainLight");
   light->setType( Ogre::Light::LT_DIRECTIONAL );
-  light->setDirection( Ogre::Vector3(-1, -1, 0) );
+  light->setDirection( Ogre::Vector3(-1, -1, -1) );
 
   Ogre::SceneNode* light_node = _sceneMgr->createSceneNode("LightNode");
   light_node->attachObject(light);
@@ -47,8 +47,7 @@ void RoomMap::create()
   Ogre::Entity *entity = _sceneMgr->createEntity("balldeprueba", "ball.mesh");
   Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
   node->attachObject(entity);
-  node->scale( Ogre::Vector3(0.5, 0.5, 0.5) );
-  // _sceneMgr->getRootSceneNode()->addChild( node );
+  node->scale( Ogre::Vector3(0.45, 0.45, 0.45) );
 
   OgreBulletCollisions::SphereCollisionShape *ballShape = new OgreBulletCollisions::SphereCollisionShape( 0.5 );
   OgreBulletDynamics::RigidBody *rigidBall = new OgreBulletDynamics::RigidBody("balldeprueba", _world);
