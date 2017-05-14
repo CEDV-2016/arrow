@@ -7,14 +7,10 @@
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
 #include <Shapes/OgreBulletCollisionsBoxShape.h>
 
+#include "Fader.hpp"
 #include "Map.hpp"
 #include "RoomMap.hpp"
-
-enum MapsEnum
-{
-  NONE = -1,
-  ROOM,
-};
+#include "Enumerations.hpp"
 
 class MapManager : public Ogre::Singleton<MapManager>
 {
@@ -24,7 +20,8 @@ public:
   MapManager(Ogre::SceneManager * sceneMgr);
   ~MapManager();
 
-  void changeMap(MapsEnum id);
+  void changeMap(enumerations::Maps id);
+  void loadMap();
   void destroyAllMaps();
   void stepSimulation(Ogre::Real deltaT);
 
@@ -33,10 +30,10 @@ public:
   static MapManager* getSingletonPtr ();
 
 private:
-  std::map<MapsEnum, MapPtr> _maps;
+  std::map<enumerations::Maps, MapPtr> _maps;
 
-  MapsEnum _currentMap;
-
+  enumerations::Maps _currentMap, _nextMap;
+  Fader * _fader;
   Ogre::SceneManager * _sceneMgr;
 
   OgreBulletDynamics::DynamicsWorld * _world;

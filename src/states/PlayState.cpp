@@ -122,7 +122,7 @@ PlayState::getSingleton ()
 void PlayState::createScene()
 {
   // TODO Delegate all the gameplay's logic to a GameplayManager
-  _mapManager->changeMap( MapsEnum::ROOM );
+  _mapManager->changeMap( enumerations::Maps::ROOM );
 }
 
 void PlayState::createGUI()

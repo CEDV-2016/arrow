@@ -12,7 +12,7 @@ IntroState::enter ()
   }
   if (_sceneMgr == NULL)
   {
-    _sceneMgr = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
+    _sceneMgr = _root->getSceneManager("SceneManager");
   }
   if (_camera == NULL)
   {

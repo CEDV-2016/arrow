@@ -2,6 +2,9 @@
 
 #include <stack>
 #include <Ogre.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayElement.h>
+#include <OgreOverlayManager.h>
 #include <OgreSingleton.h>
 #include <OIS/OIS.h>
 #include <CEGUI.h>
@@ -43,6 +46,7 @@ class GameStatesManager : public Ogre::FrameListener, public Ogre::Singleton<Gam
   TrackManager* _trackManager;
   TrackPtr _mainTrack;
   SoundFXManager* _pSoundFXManager;
+  Ogre::OverlayManager* _overlayManager;
 
   // Funciones de configuración.
   void loadResources ();

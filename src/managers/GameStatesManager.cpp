@@ -177,7 +177,11 @@ GameStatesManager::configure ()
 
   _renderWindow = _root->initialise(true, "Physics game");
 
+  _sceneManager = _root->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
+
+  _sceneManager->addRenderQueueListener( new Ogre::OverlaySystem() );
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+  _overlayManager = Ogre::OverlayManager::getSingletonPtr();
 
   return true;
 }

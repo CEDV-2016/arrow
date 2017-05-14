@@ -1,0 +1,13 @@
+Overlays/Fader
+{
+  zorder 650
+
+  container Panel(FadePanel)
+  {
+    left 0
+    top 0
+    width 1
+    height 1
+    material Materials/OverlayMaterial
+  }
+}
