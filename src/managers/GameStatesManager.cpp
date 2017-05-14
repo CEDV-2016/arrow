@@ -12,13 +12,16 @@ GameStatesManager::GameStatesManager ()
 
 GameStatesManager::~GameStatesManager ()
 {
-  while (!_states.empty()) {
+  while (!_states.empty())
+  {
     _states.top()->exit();
     _states.pop();
   }
 
   if (_root)
-  delete _root;
+  {
+    delete _root;
+  }
 
   OGRE_DELETE _trackManager;
   OGRE_DELETE _pSoundFXManager;
@@ -156,9 +159,9 @@ GameStatesManager::loadResources ()
     Ogre::ConfigFile::SettingsMultiMap *settings = sI.getNext();
     Ogre::ConfigFile::SettingsMultiMap::iterator i;
     for (i = settings->begin(); i != settings->end(); ++i) {
-      typestr = i->first;    datastr = i->second;
-      Ogre::ResourceGroupManager::getSingleton().addResourceLocation
-      (datastr, typestr, sectionstr);
+      typestr = i->first;
+      datastr = i->second;
+      Ogre::ResourceGroupManager::getSingleton().addResourceLocation(datastr, typestr, sectionstr);
     }
   }
 }
@@ -172,7 +175,7 @@ GameStatesManager::configure ()
     }
   }
 
-  _renderWindow = _root->initialise(true, "SpaceInvaders");
+  _renderWindow = _root->initialise(true, "Physics game");
 
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 

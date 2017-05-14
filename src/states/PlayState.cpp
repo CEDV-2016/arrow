@@ -122,16 +122,7 @@ PlayState::getSingleton ()
 void PlayState::createScene()
 {
   // TODO Delegate all the gameplay's logic to a GameplayManager
-
   _mapManager->changeMap( MapsEnum::ROOM );
-
-  //Creating the player
-  Ogre::Entity * entity = _sceneMgr->createEntity("Player.mesh");
-  entity->setCastShadows(true);
-  Ogre::SceneNode * node = _sceneMgr->createSceneNode("Player");
-  node->attachObject(entity);
-  node->setPosition( Ogre::Vector3::ZERO );
-  _sceneMgr->getRootSceneNode()->addChild(node);
 }
 
 void PlayState::createGUI()

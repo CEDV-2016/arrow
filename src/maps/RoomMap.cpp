@@ -14,11 +14,11 @@ void RoomMap::create()
   std::string map_file = "Scenario.mesh";
 
   // Creating light
-  Ogre::Light *light = _sceneMgr->createLight("MainLight");
+  Ogre::Light *light = _sceneMgr->createLight();
   light->setType( Ogre::Light::LT_DIRECTIONAL );
   light->setDirection( Ogre::Vector3(-1, -1, -1) );
 
-  Ogre::SceneNode* light_node = _sceneMgr->createSceneNode("LightNode");
+  Ogre::SceneNode* light_node = _sceneMgr->createSceneNode("RoomLight");
   light_node->attachObject(light);
   _sceneMgr->getRootSceneNode()->addChild(light_node);
 
@@ -58,6 +58,6 @@ void RoomMap::create()
 
 void RoomMap::destroy()
 {
-  // TODO
-  std::cout << "Destroying room map...\n";
+  _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( "Room" ) );
+  _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( "RoomLight" ) );
 }

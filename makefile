@@ -8,13 +8,14 @@ SUBDIRHEA := $(shell ls -p $(DIRHEA) | grep /)
 
 CXX := g++
 
-# Compiling flags --------------------------------------------------------------
+# Compilig flags ---------------------------------------------------------------
 CXXFLAGS := $(addprefix -I$(DIRHEA), $(SUBDIRHEA))
-CXXFLAGS += -Wall -std=c++11 -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0 `pkg-config --cflags OGRE OGRE-Overlay OgreBullet bullet OIS`
+CXXFLAGS += `pkg-config --cflags OGRE OGRE-Overlay OgreBullet bullet OIS`
+CXXFLAGS += -Wall -std=c++11 -I/usr/local/include/cegui-0/CEGUI -I/usr/local/include/cegui-0
 
-# Linker flags -----------------------------------------------------------------
+# Linking flags ----------------------------------------------------------------
 LDFLAGS := `pkg-config --libs-only-L OGRE` -lstdc++
-LDLIBS := `pkg-config --libs-only-l OgreBullet OGRE OGRE-Overlay bullet SDL2_mixer` -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lboost_system -lCEGUIOgreRenderer-0
+LDLIBS := `pkg-config --libs-only-l OGRE OGRE-Overlay OgreBullet bullet SDL2_mixer` -lOIS -lGL -lstdc++ -lCEGUIBase-0 -lboost_system -lCEGUIOgreRenderer-0
 
 # Compiling mode (-mode=release -mode=debug) -----------------------------------
 ifeq ($(mode), release)
