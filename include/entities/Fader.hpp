@@ -13,12 +13,12 @@ class Fader
 public:
      static constexpr float FADE_DURATION = 0.5f;
 
-     Fader( std::function<void ()> callback = nullptr );
-     ~Fader(void);
+     Fader();
+     ~Fader();
 
-     void startFadeIn( double duration = FADE_DURATION );
-     void startFadeOut( double duration = FADE_DURATION );
-     void fade( double timeSinceLastFrame );
+     void startFadeIn( std::function<void ()> callback = nullptr );
+     void startFadeOut( std::function<void ()> callback = nullptr );
+     void update( double timeSinceLastFrame );
      void setNextMap( enumerations::Maps newMap );
 
 protected:
@@ -33,7 +33,8 @@ protected:
      Ogre::Overlay *_overlay;
 
      enumerations::Maps _newMap;
-     std::function<void ()> _callback;
+     std::function<void ()> _callback_fade_in;
+     std::function<void ()> _callback_fade_out;
 
      enum _fadeop
      {

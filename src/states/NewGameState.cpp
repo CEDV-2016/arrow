@@ -1,6 +1,7 @@
 #include "NewGameState.hpp"
 #include "PlayState.hpp"
 #include "SoundFXManager.hpp"
+#include "MapManager.hpp"
 
 template<> NewGameState* Ogre::Singleton<NewGameState>::msSingleton = 0;
 
@@ -45,6 +46,8 @@ bool
 NewGameState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
+  MapManager::getSingletonPtr()->update( evt.timeSinceLastFrame );
+
   return true;
 }
 
@@ -123,10 +126,15 @@ void NewGameState::createGUI(){
 
 bool NewGameState::newGame(const CEGUI::EventArgs &e)
 {
+  MapManager::getSingletonPtr()->fadeOut( std::bind(&NewGameState::changeState, this) );
+  return true;
+}
+
+void NewGameState::changeState()
+{
   PlayState* playState = PlayState::getSingletonPtr();
   playState->setPlayerName(_nameText->getText().c_str());
   pushState(playState);
-  return true;
 }
 
 bool NewGameState::back(const CEGUI::EventArgs &e)

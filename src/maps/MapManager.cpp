@@ -2,11 +2,11 @@
 
 template<> MapManager* Ogre::Singleton<MapManager>::msSingleton = 0;
 
-MapManager::MapManager(Ogre::SceneManager * sceneMgr)
+MapManager::MapManager( Ogre::SceneManager * sceneMgr )
 {
   _sceneMgr = sceneMgr;
   _currentMap = enumerations::Maps::NONE;
-  _fader = new Fader( std::bind(&MapManager::loadMap, this) );
+  _fader = new Fader();
 
   Ogre::AxisAlignedBox worldBounds = Ogre::AxisAlignedBox( Ogre::Vector3 (-100, -100, -100), Ogre::Vector3 (100,  100,  100) );
   Ogre::Vector3 gravity = Ogre::Vector3( 0, -9.8, 0 );
@@ -18,7 +18,10 @@ MapManager::MapManager(Ogre::SceneManager * sceneMgr)
   node->attachObject(static_cast <Ogre::SimpleRenderable *>( _debugDrawer ));
 
   _world->setDebugDrawer(_debugDrawer);
-  _world->setShowDebugShapes(true); // to paint green wires around physic bodies
+
+  #ifdef _DEBUG
+  _world->setShowDebugShapes(true); // paint green wires around physic bodies
+  #endif
 
   initMaps();
 }
@@ -38,9 +41,9 @@ void MapManager::initMaps()
   // Here will go the declaration of the rest of the maps the game is using
 }
 
-void MapManager::stepSimulation(Ogre::Real deltaT)
+void MapManager::update( Ogre::Real deltaT )
 {
-  _fader->fade( deltaT );
+  _fader->update( deltaT );
   _world->stepSimulation( deltaT );
 }
 
@@ -49,13 +52,20 @@ void MapManager::stepSimulation(Ogre::Real deltaT)
 * Once the fade is completed, it will automatically callback the load
 * of the new map and then fade in again.
 */
-void MapManager::changeMap(enumerations::Maps newMap)
+void MapManager::changeMap(enumerations::Maps newMap, bool fade)
 {
   _nextMap = newMap;
   _fader->setNextMap(newMap);
-  _fader->startFadeOut();
-}
 
+  if ( fade )
+  {
+    _fader->startFadeOut( std::bind(&MapManager::loadMap, this) );
+  }
+  else
+  {
+    loadMap();
+  }
+}
 
 void MapManager::loadMap()
 {
@@ -63,7 +73,7 @@ void MapManager::loadMap()
   {
     _maps[ _currentMap ]->destroy();
   }
-  
+
   _maps[ _nextMap ]->create();
 
   _currentMap = _nextMap;
@@ -71,6 +81,15 @@ void MapManager::loadMap()
   _fader->startFadeIn();
 }
 
+void MapManager::fadeOut( std::function<void ()> callback )
+{
+  _fader->startFadeOut( callback );
+}
+
+void MapManager::fadeIn( std::function<void ()> callback )
+{
+  _fader->startFadeIn( callback );
+}
 
 void MapManager::destroyAllMaps()
 {
@@ -81,4 +100,14 @@ void MapManager::destroyAllMaps()
     key = it->first;
     _maps[ key ]->destroy();
   }
+}
+
+MapManager& MapManager::getSingleton() {
+  assert(msSingleton);
+  return (*msSingleton);
+}
+
+MapManager* MapManager::getSingletonPtr() {
+  assert(msSingleton);
+  return msSingleton;
 }

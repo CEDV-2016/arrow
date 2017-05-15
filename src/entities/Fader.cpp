@@ -1,11 +1,10 @@
 #include "Fader.hpp"
 #include "MapManager.hpp"
 
-Fader::Fader( std::function<void ()> callback )
+Fader::Fader()
 {
   _fadeop = FADE_NONE;
   _alpha = 0.0;
-  _callback = callback;
 
   // Get the material by name
   Ogre::ResourcePtr resptr = Ogre::MaterialManager::getSingleton().getByName( _material_name );
@@ -20,27 +19,29 @@ Fader::Fader( std::function<void ()> callback )
   _overlay->hide();
 }
 
-Fader::~Fader(void){}
+Fader::~Fader(){}
 
-void Fader::startFadeIn( double duration )
+void Fader::startFadeIn( std::function<void ()> callback )
 {
   _alpha = 1.0;
-  _total_dur = duration;
-  _current_dur = duration;
+  _total_dur = FADE_DURATION;
+  _current_dur = FADE_DURATION;
+  _callback_fade_in = callback;
   _fadeop = FADE_IN;
   _overlay->show();
 }
 
-void Fader::startFadeOut( double duration )
+void Fader::startFadeOut( std::function<void ()> callback )
 {
   _alpha = 0.0;
-  _total_dur = duration;
+  _total_dur = FADE_DURATION;
   _current_dur = 0.0;
+  _callback_fade_out = callback;
   _fadeop = FADE_OUT;
   _overlay->show();
 }
 
-void Fader::fade( double timeSinceLastFrame )
+void Fader::update( double timeSinceLastFrame )
 {
   if( _fadeop != FADE_NONE && _tex_unit )
   {
@@ -58,6 +59,11 @@ void Fader::fade( double timeSinceLastFrame )
       {
         _overlay->hide();
         _fadeop = FADE_NONE;
+
+        if ( _callback_fade_in )
+        {
+          _callback_fade_in();
+        }
       }
     }
 
@@ -70,10 +76,10 @@ void Fader::fade( double timeSinceLastFrame )
       {
         _fadeop = FADE_NONE;
 
-        // When the overlay gets completely black loads the map
-        if( _callback )
+        // When the overlay gets completely black executes the callback (normally load the new map)
+        if( _callback_fade_out )
         {
-          _callback();
+          _callback_fade_out();
         }
       }
     }

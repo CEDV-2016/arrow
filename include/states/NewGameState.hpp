@@ -39,6 +39,7 @@ public:
 
   bool newGame(const CEGUI::EventArgs &e);
   bool back(const CEGUI::EventArgs &e);
+  void changeState();
 
 protected:
   Ogre::Root* _root;

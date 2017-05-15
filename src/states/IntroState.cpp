@@ -1,5 +1,6 @@
 #include "IntroState.hpp"
 #include "MainState.hpp"
+#include "MapManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
@@ -38,8 +39,11 @@ IntroState::enter ()
   _sceneMgr->setShadowTextureCount(30);
   _sceneMgr->setShadowTextureSize(512);
 
+  new MapManager( _sceneMgr );
+
   createGUI();
   loadBackgroundImage();
+
 
   _exitGame = false;
 }
@@ -64,9 +68,11 @@ IntroState::resume ()
 }
 
 bool
-IntroState::frameStarted/* code */
+IntroState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
+  MapManager::getSingletonPtr()->update( evt.timeSinceLastFrame );
+
   return true;
 }
 
@@ -167,4 +173,6 @@ void IntroState::loadBackgroundImage()
   _rect->setBoundingBox(Ogre::AxisAlignedBox(-100000.0*Ogre::Vector3::UNIT_SCALE, 100000.0*Ogre::Vector3::UNIT_SCALE));
   _backgroundNode = _sceneMgr->getRootSceneNode()->createChildSceneNode("BackgroundMenu");
   _backgroundNode->attachObject(_rect);
+
+  MapManager::getSingletonPtr()->fadeIn();
 }

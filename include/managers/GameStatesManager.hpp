@@ -22,7 +22,7 @@ class GameState;
 
 class GameStatesManager : public Ogre::FrameListener, public Ogre::Singleton<GameStatesManager>, public OIS::KeyListener, public OIS::MouseListener
 {
- public:
+public:
   GameStatesManager ();
   ~GameStatesManager (); // Limpieza de todos los estados.
 
@@ -39,7 +39,7 @@ class GameStatesManager : public Ogre::FrameListener, public Ogre::Singleton<Gam
   static GameStatesManager& getSingleton ();
   static GameStatesManager* getSingletonPtr ();
 
- protected:
+protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneManager;
   Ogre::RenderWindow* _renderWindow;
@@ -58,7 +58,7 @@ class GameStatesManager : public Ogre::FrameListener, public Ogre::Singleton<Gam
 
   bool initSDL();
 
- private:
+private:
   // Funciones para delegar eventos de teclado
   // y ratón en el estado actual.
   bool keyPressed (const OIS::KeyEvent &e);

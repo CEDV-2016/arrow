@@ -2,7 +2,6 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
-#include "RoomMap.hpp"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -19,7 +18,7 @@ PlayState::enter ()
 
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
-  _mapManager = new MapManager(_sceneMgr);
+  _mapManager = MapManager::getSingletonPtr();
 
   _sceneMgr->clearScene(); //deleting background image
   _sceneMgr->getCamera("MainCamera")->setPosition( Ogre::Vector3(-12, 10, 12) );
@@ -56,7 +55,7 @@ PlayState::frameStarted
 {
   Ogre::Real deltaT = evt.timeSinceLastFrame;
 
-  _mapManager->stepSimulation( deltaT );
+  _mapManager->update( deltaT );
 
   return true;
 }
@@ -122,7 +121,7 @@ PlayState::getSingleton ()
 void PlayState::createScene()
 {
   // TODO Delegate all the gameplay's logic to a GameplayManager
-  _mapManager->changeMap( enumerations::Maps::ROOM );
+  _mapManager->changeMap( enumerations::Maps::ROOM, false );
 }
 
 void PlayState::createGUI()

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Ogre.h>
+#include <OgreOverlaySystem.h>
+#include <OgreOverlayElement.h>
+#include <OgreOverlayManager.h>
 #include <OIS/OIS.h>
 #include <CEGUI.h>
 #include <RendererModules/Ogre/Renderer.h>

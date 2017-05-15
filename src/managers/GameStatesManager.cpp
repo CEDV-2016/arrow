@@ -2,6 +2,7 @@
 
 #include "GameStatesManager.hpp"
 #include "GameState.hpp"
+#include "MapManager.hpp"
 
 template<> GameStatesManager* Ogre::Singleton<GameStatesManager>::msSingleton = 0;
 
@@ -182,7 +183,7 @@ GameStatesManager::configure ()
   _sceneManager->addRenderQueueListener( new Ogre::OverlaySystem() );
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
   _overlayManager = Ogre::OverlayManager::getSingletonPtr();
-
+  
   return true;
 }
 

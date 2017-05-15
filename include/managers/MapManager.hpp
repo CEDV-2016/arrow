@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <Ogre.h>
+#include <OgreSingleton.h>
 #include <OgreBulletDynamicsRigidBody.h>
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
 #include <Shapes/OgreBulletCollisionsBoxShape.h>
@@ -17,13 +18,15 @@ class MapManager : public Ogre::Singleton<MapManager>
 public:
   typedef std::shared_ptr<Map> MapPtr;
 
-  MapManager(Ogre::SceneManager * sceneMgr);
+  MapManager( Ogre::SceneManager * sceneMgr );
   ~MapManager();
 
-  void changeMap(enumerations::Maps id);
+  void changeMap(enumerations::Maps id, bool fade);
   void loadMap();
+  void fadeOut( std::function<void ()> callback = nullptr );
+  void fadeIn ( std::function<void ()> callback = nullptr );
   void destroyAllMaps();
-  void stepSimulation(Ogre::Real deltaT);
+  void update( Ogre::Real deltaT );
 
   // Inherited from Ogre::Singleton.
   static MapManager& getSingleton ();
