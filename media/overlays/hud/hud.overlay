@@ -1,0 +1,87 @@
+template element TextArea(MyTemplates/Text)
+{
+  font_name Return_to_sender
+  metrics_mode pixels
+  char_height 64
+  colour 0.0 0.0 0.0
+}
+
+template element TextArea(MyTemplates/SmallText)
+{
+  font_name Return_to_sender
+  metrics_mode pixels
+  char_height 36
+  colour 1.0 1.0 1.0
+}
+
+HUD
+{
+  zorder 500
+
+  container Panel(nameHUD)
+  {
+    metrics_mode pixels
+    left 50
+    top 75
+    width 376
+    height 80
+    horz_align left
+    vert_align top
+    material nameMaterial
+
+    element TextArea(nameTextArea) : MyTemplates/Text
+    {
+      top 9
+      left 20
+    }
+
+  }
+
+  container Panel(dianaHUD)
+  {
+    metrics_mode pixels
+    left 50
+    top 190
+    width 91
+    height 87
+    horz_align left
+    vert_align top
+    material dianaMaterial
+
+    element TextArea(dianaTextArea) : MyTemplates/Text
+    {
+      top 10
+      left 105
+    }
+  }
+
+  container Panel(arrowHUD)
+  {
+    metrics_mode pixels
+    left 60
+    top 300
+    width 74
+    height 77
+    horz_align left
+    vert_align top
+    material arrowMaterial
+
+    element TextArea(arrowTextArea) : MyTemplates/Text
+    {
+      top 10
+      left 95
+    }
+  }
+
+  container Panel(eyeholeHUD)
+  {
+    metrics_mode pixels
+    left 640
+    top 360
+    width 36
+    height 36
+    horz_align left
+    vert_align top
+    material eyeholeMaterial
+  }
+}

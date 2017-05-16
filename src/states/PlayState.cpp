@@ -2,6 +2,7 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
+#include "OgreOverlayManager.h"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -26,6 +27,20 @@ PlayState::enter ()
 
   createScene();
   // createGUI();
+
+  Ogre::Overlay *overlay = Ogre::OverlayManager::getSingletonPtr()->getByName("HUD");
+
+  Ogre::OverlayElement *oe;
+  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("nameTextArea");
+  oe->setCaption("Pedro");
+
+  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("dianaTextArea");
+  oe->setCaption("x4");
+
+  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("arrowTextArea");
+  oe->setCaption("x6");
+
+  overlay->show();
 
   _exitGame = false;
 }

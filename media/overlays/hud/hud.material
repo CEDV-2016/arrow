@@ -1,0 +1,59 @@
+material nameMaterial
+{
+  technique
+  {
+    pass
+    {
+      scene_blend src_alpha one_minus_src_alpha
+      texture_unit
+      {
+        texture name.png
+      }
+    }
+  }
+}
+
+material dianaMaterial
+{
+  technique
+  {
+    pass
+    {
+      scene_blend src_alpha one_minus_src_alpha
+      texture_unit
+      {
+        texture diana.png
+      }
+    }
+  }
+}
+
+material arrowMaterial
+{
+  technique
+  {
+    pass
+    {
+      scene_blend src_alpha one_minus_src_alpha
+      texture_unit
+      {
+        texture arrow.png
+      }
+    }
+  }
+}
+
+material eyeholeMaterial
+{
+  technique
+  {
+    pass
+    {
+      scene_blend src_alpha one_minus_src_alpha
+      texture_unit
+      {
+        texture eyehole.png
+      }
+    }
+  }
+}
