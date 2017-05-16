@@ -3,16 +3,17 @@
 #include "CreditsState.hpp"
 #include "RankingState.hpp"
 #include "SoundFXManager.hpp"
+#include "MapManager.hpp"
 
 template<> MainState* Ogre::Singleton<MainState>::msSingleton = 0;
 
 MainState* MainState::getSingletonPtr () {
-    return msSingleton;
+  return msSingleton;
 }
 
 MainState& MainState::getSingleton () {
-    assert (msSingleton);
-    return *msSingleton;
+  assert (msSingleton);
+  return *msSingleton;
 }
 
 void MainState::enter () {
@@ -42,22 +43,31 @@ void MainState::resume () {
   _main->show();
 }
 
-bool MainState::frameStarted (const Ogre::FrameEvent &evt) {
-    return true;
+bool MainState::frameStarted (const Ogre::FrameEvent &evt)
+{
+  MapManager::getSingletonPtr()->update( evt.timeSinceLastFrame );
+
+  return true;
 }
 
-bool MainState::frameEnded (const Ogre::FrameEvent &evt) {
-    return !_exit;
+bool MainState::frameEnded (const Ogre::FrameEvent &evt)
+{
+  if (_exit) return false;
+
+  return true;
 }
 
-void MainState::keyPressed (const OIS::KeyEvent &e) {
+void MainState::keyPressed (const OIS::KeyEvent &e) {}
+
+void MainState::keyReleased (const OIS::KeyEvent &e)
+{
+  if (e.key == OIS::KC_ESCAPE)
+  {
+    _exit = true;
+  }
 }
 
-void MainState::keyReleased (const OIS::KeyEvent &e) {
-}
-
-void MainState::mouseMoved (const OIS::MouseEvent &e) {
-}
+void MainState::mouseMoved (const OIS::MouseEvent &e) {}
 
 void MainState::mousePressed (const OIS::MouseEvent &e, OIS::MouseButtonID id) {}
 
@@ -72,18 +82,16 @@ void MainState::createGUI()
 
     //Config Buttons
     CEGUI::Window* _newButton = _main->getChild("NewButton");
-    _newButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			     CEGUI::Event::Subscriber(&MainState::newGame,this));
+    _newButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::newGame,this));
     CEGUI::Window* _creditsButton = _main->getChild("CreditsButton");
-    _creditsButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-       		 CEGUI::Event::Subscriber(&MainState::navigateToCredits,this));
+    _creditsButton->subscribeEvent(CEGUI::PushButton::EventClicked,  CEGUI::Event::Subscriber(&MainState::navigateToCredits,this));
     CEGUI::Window* _rankingButton = _main->getChild("RankingButton");
-    _rankingButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-           CEGUI::Event::Subscriber(&MainState::navigateToRanking,this));
+    _rankingButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::navigateToRanking,this));
     CEGUI::Window* _exitButton = _main->getChild("ExitButton");
-    _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			     CEGUI::Event::Subscriber(&MainState::quit,this));
-  } else{
+    _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::quit,this));
+  }
+  else
+  {
     _main->show();
   }
 }

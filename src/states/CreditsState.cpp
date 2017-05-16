@@ -64,6 +64,10 @@ void
 CreditsState::keyReleased
 (const OIS::KeyEvent &e)
 {
+  if (e.key == OIS::KC_ESCAPE)
+  {
+    _exitGame = true;
+  }
 }
 
 void

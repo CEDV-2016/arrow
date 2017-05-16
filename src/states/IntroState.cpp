@@ -99,7 +99,8 @@ IntroState::keyReleased
   if (e.key == OIS::KC_ESCAPE)
   {
     _exitGame = true;
-  }else if (e.key == OIS::KC_SPACE)
+  }
+  else if (e.key == OIS::KC_SPACE)
   {
     pushState(MainState::getSingletonPtr());
   }

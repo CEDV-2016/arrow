@@ -8,26 +8,16 @@
         <Window type="Vanilla/Label" name="SpaceText" >
             <Property name="Area" value="{{0,0},{0,-160},{0,1380},{0,156}}" />
             <Property name="Font" value="Jura-100" />
-            <Property name="Text" value="[colour='FF000000']PHYSICS" />
+            <Property name="Text" value="[colour='FF000000']LOGO" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="AspectRatio" value="1.8" />
             <Property name="VertFormatting" value="BottomAligned" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
-        <Window type="Vanilla/Label" name="InvadersText" >
-            <Property name="Area" value="{{0,0},{0,98},{0,1696},{0,414}}" />
-            <Property name="Font" value="Jura-100" />
-            <Property name="Text" value="[colour='FF000000']GAME" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="AspectRatio" value="1.8" />
-            <Property name="VertFormatting" value="TopAligned" />
-            <Property name="VerticalAlignment" value="Centre" />
-            <Property name="HorizontalAlignment" value="Centre" />
-        </Window>
         <Window type="Vanilla/Label" name="ContinueText" >
             <Property name="Area" value="{{0,0},{0,-64},{0,1268},{0,12}}" />
-            <Property name="Font" value="Jura-35" />
+            <Property name="Font" value="Jura-45" />
             <Property name="Text" value="[colour='FF000000']Pulsa espacio" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Bottom" />
