@@ -32,7 +32,7 @@ HUD
     element TextArea(nameTextArea) : MyTemplates/Text
     {
       top 9
-      left 20
+      left 25
     }
 
   }
@@ -84,4 +84,23 @@ HUD
     vert_align top
     material eyeholeMaterial
   }
+
+  container Panel(timerHUD)
+  {
+    metrics_mode pixels
+    left -426
+    top 75
+    width 376
+    height 80
+    horz_align right
+    vert_align top
+    material timerMaterial
+
+    element TextArea(timerTextArea) : MyTemplates/Text
+    {
+      top 9
+      left 225
+    }
+  }
+
 }
