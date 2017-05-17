@@ -40,6 +40,9 @@ PlayState::enter ()
   oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("arrowTextArea");
   oe->setCaption("x6");
 
+  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("timerTextArea");
+  oe->setCaption("01.59");
+
   overlay->show();
 
   _exitGame = false;
