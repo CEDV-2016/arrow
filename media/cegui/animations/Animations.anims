@@ -1,0 +1,14 @@
+<Animations>
+
+  <AnimationDefinition name="NewGameAnim" duration="0.3" replayMode="once">
+    <Affector property="Alpha" interpolator="float">
+      <KeyFrame position="0.0" value="1.0" />
+      <KeyFrame position="0.3" value="0.5" />
+    </Affector>
+    <Affector property="YRotation" interpolator="float">
+      <KeyFrame position="0.0" value="0" />
+      <KeyFrame position="0.3" value="10" />
+    </Affector>
+  </AnimationDefinition>
+
+</Animations>

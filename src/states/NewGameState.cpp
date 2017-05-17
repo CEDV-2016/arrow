@@ -126,6 +126,14 @@ void NewGameState::createGUI(){
 
 bool NewGameState::newGame(const CEGUI::EventArgs &e)
 {
+  /*CEGUI::AnimationManager& animMgr = CEGUI::AnimationManager::getSingletonPtr();
+  animMgr.loadAnimationsFromXML("Animations.anims");
+
+  CEGUI::Animation* startButtAnim = animMgr.getAnimation("NewGameAnim");
+  CEGUI::AnimationInstance* startButtAnimInstance = animMgr.instantiateAnimation(startButtAnim);
+  startButtAnimInstance->setTargetWindow(_nameText);
+  startButtAnimInstance->start();*/
+
   MapManager::getSingletonPtr()->fadeOut( std::bind(&NewGameState::changeState, this) );
   return true;
 }
