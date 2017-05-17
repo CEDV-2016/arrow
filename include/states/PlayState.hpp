@@ -40,8 +40,7 @@ public:
   static PlayState* getSingletonPtr ();
 
   void createScene();
-  void createGUI();
-  void updateGUI();
+  void createHUD();
 
   void setPlayerName(std::string name);
 

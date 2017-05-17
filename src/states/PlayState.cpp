@@ -2,7 +2,7 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
-#include "OgreOverlayManager.h"
+#include "MyOverlayManager.hpp"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -26,24 +26,9 @@ PlayState::enter ()
   _sceneMgr->getCamera("MainCamera")->lookAt( Ogre::Vector3(-5, 5, -9) );
 
   createScene();
-  // createGUI();
+  createHUD();
 
-  Ogre::Overlay *overlay = Ogre::OverlayManager::getSingletonPtr()->getByName("HUD");
 
-  Ogre::OverlayElement *oe;
-  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("nameTextArea");
-  oe->setCaption("Pedro");
-
-  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("dianaTextArea");
-  oe->setCaption("x4");
-
-  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("arrowTextArea");
-  oe->setCaption("x6");
-
-  oe = Ogre::OverlayManager::getSingletonPtr()->getOverlayElement("timerTextArea");
-  oe->setCaption("01.59");
-
-  overlay->show();
 
   _exitGame = false;
 }
@@ -138,25 +123,17 @@ PlayState::getSingleton ()
 
 void PlayState::createScene()
 {
-  // TODO Delegate all the gameplay's logic to a GameplayManager
   _mapManager->changeMap( enumerations::Maps::ROOM, false );
 }
 
-void PlayState::createGUI()
+void PlayState::createHUD()
 {
-  if(_playGUI == NULL){
-    //Config Window
-    _playGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("play.layout");
-    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_playGUI);
-
-    //Config Buttons
-    CEGUI::Window* _layout = _playGUI->getChild("FrameWindow");
-    _nameView = _layout->getChild("NameLabel");
-  }
-  else
-  {
-    _playGUI->show();
-  }
+  new MyOverlayManager();
+  MyOverlayManager::getSingletonPtr()->createHUD();
+  MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
+  MyOverlayManager::getSingletonPtr()->setTime( "1.59" );
+  MyOverlayManager::getSingletonPtr()->setDianasLeft( "x6" );
+  MyOverlayManager::getSingletonPtr()->setArrowsLeft( "x4" );
 }
 
 void PlayState::setPlayerName(std::string name)
