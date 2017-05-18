@@ -133,7 +133,7 @@ bool NewGameState::newGame(const CEGUI::EventArgs &e)
   CEGUI::AnimationInstance* startButtAnimInstance = animMgr.instantiateAnimation(startButtAnim);
   startButtAnimInstance->setTargetWindow(_nameText);
   startButtAnimInstance->start();*/
-
+  _newgameGUI->hide();
   MapManager::getSingletonPtr()->fadeOut( std::bind(&NewGameState::changeState, this) );
   return true;
 }

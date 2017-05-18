@@ -42,6 +42,8 @@ public:
   void createScene();
   void createHUD();
 
+  void moveCamera();
+
   void setPlayerName(std::string name);
 
   void endGame(bool win);
@@ -64,4 +66,17 @@ protected:
 
   bool _exitGame;
   bool _evenFrame;
+
+  //Camera movement
+  Ogre::AnimationState *_animState;
+  Ogre::SceneNode *cameraNode;
+  Ogre::SceneNode *cameraYawNode;
+  Ogre::SceneNode *cameraPitchNode;
+  Ogre::SceneNode *cameraRollNode;
+  Ogre::Vector3 translateVector;
+  Ogre::Radian rotateScale;
+  float moveScale;
+  Ogre::Radian rotX;
+  Ogre::Radian rotY;
+  bool _moveRight, _moveLeft, _moveUp, _moveDown;
 };
