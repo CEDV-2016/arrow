@@ -128,7 +128,6 @@ void PlayState::createScene()
 
 void PlayState::createHUD()
 {
-  new MyOverlayManager();
   MyOverlayManager::getSingletonPtr()->createHUD();
   MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
   MyOverlayManager::getSingletonPtr()->setTime( "1.59" );

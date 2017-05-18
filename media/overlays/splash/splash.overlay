@@ -1,0 +1,16 @@
+SplashOverlay
+{
+  zorder 500
+
+  container Panel(splashPanel)
+  {
+    metrics_mode pixels
+    left 0
+    top -100
+    width 1311
+    height 711
+    horz_align left
+    vert_align top
+    material splashMaterial
+  }
+}

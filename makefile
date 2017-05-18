@@ -1,4 +1,4 @@
-EXEC := PhysicsGame
+EXEC := Arrow
 
 DIRSRC := src/
 DIROBJ := obj/

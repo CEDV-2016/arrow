@@ -1,6 +1,7 @@
 #include "IntroState.hpp"
 #include "MainState.hpp"
 #include "MapManager.hpp"
+#include "MyOverlayManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
@@ -40,6 +41,7 @@ IntroState::enter ()
   _sceneMgr->setShadowTextureSize(512);
 
   new MapManager( _sceneMgr );
+  new MyOverlayManager();
 
   createGUI();
   loadBackgroundImage();
@@ -58,6 +60,7 @@ IntroState::exit()
 void
 IntroState::pause ()
 {
+  Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->hide();
   _intro->hide();
 }
 
@@ -145,6 +148,8 @@ void IntroState::createGUI()
   {
     _intro = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("splash.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_intro);
+
+    Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->show();
   }
   else
   {
