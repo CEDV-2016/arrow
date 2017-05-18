@@ -78,4 +78,5 @@ protected:
   float moveScale;
   Ogre::Radian rotX;
   Ogre::Radian rotY;
+  bool _moveRight, _moveLeft, _moveUp, _moveDown;
 };
