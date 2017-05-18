@@ -99,7 +99,7 @@ HUD
     element TextArea(timerTextArea) : MyTemplates/Text
     {
       top 9
-      left 225
+      left 240
     }
   }
 

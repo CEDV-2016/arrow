@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ctime>
+#include <time.h>  /* CLOCKS_PER_SEC */
 #include <Ogre.h>
 
 class Timer
@@ -18,8 +19,8 @@ public:
 
 private:
 
-  clock_t _startedAt;
-  clock_t _pausedAt;
+  clock_t _started_at;
+  clock_t _paused_at;
 
   bool _started;
   bool _paused;
