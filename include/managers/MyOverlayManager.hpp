@@ -16,8 +16,8 @@ public:
   void createHUD();
   void destroyHUD();
 
+  void setTime(Ogre::String time);
   void setPlayerName(std::string name);
-  void setTime(std::string time);
   void setArrowsLeft(std::string arrows);
   void setDianasLeft(std::string dianas);
 

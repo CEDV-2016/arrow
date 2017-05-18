@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 
+#include "Timer.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MapManager.hpp"
@@ -63,6 +64,7 @@ protected:
   Game *_game;
   MapManager * _mapManager;
   std::string _name;
+  Timer * _timer;
 
   bool _exitGame;
   bool _evenFrame;

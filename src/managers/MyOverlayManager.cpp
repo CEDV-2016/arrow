@@ -35,10 +35,10 @@ void MyOverlayManager::setPlayerName(std::string name)
   _overlayElement->setCaption( Ogre::String( name ) );
 }
 
-void MyOverlayManager::setTime(std::string time)
+void MyOverlayManager::setTime(Ogre::String time)
 {
   _overlayElement = _ogreOverlayMgr->getOverlayElement("timerTextArea");
-  _overlayElement->setCaption( Ogre::String( time ) );
+  _overlayElement->setCaption( time );
 }
 void MyOverlayManager::setArrowsLeft(std::string arrows_left)
 {

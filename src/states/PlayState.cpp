@@ -10,11 +10,14 @@ PlayState::PlayState()
 {
   _game = new Game();
   _playGUI = NULL;
+  _timer = new Timer();
 }
 
 void
 PlayState::enter ()
 {
+  _timer->start();
+
   _root = Ogre::Root::getSingletonPtr();
 
   _sceneMgr = _root->getSceneManager("SceneManager");
@@ -25,7 +28,7 @@ PlayState::enter ()
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");
   cam->setPosition( Ogre::Vector3(0, 0, 0) );
   //_sceneMgr->getCamera("MainCamera")->lookAt( Ogre::Vector3(-5, 5, -9) );
-  cam->setNearClipDistance(5);
+  cam->setNearClipDistance(0.001);
   cam->setFarClipDistance(10000);
 
   createScene();
@@ -77,6 +80,8 @@ PlayState::frameStarted
   Ogre::Real deltaT = evt.timeSinceLastFrame;
 
   _mapManager->update( deltaT );
+
+  MyOverlayManager::getSingletonPtr()->setTime( _timer->getGameplayTime() );
 
   moveCamera();
 

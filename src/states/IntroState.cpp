@@ -27,7 +27,7 @@ IntroState::enter ()
   // Creating and placing camera
   _camera->setPosition( Ogre::Vector3(0, 0, 10) );
   _camera->lookAt( Ogre::Vector3(0, 0, 8) );
-  _camera->setNearClipDistance(1);
+  _camera->setNearClipDistance(0.001);
   _camera->setFarClipDistance(1000);
   _camera->setFOVy(Ogre::Degree(38));
   double width = _viewport->getActualWidth();
