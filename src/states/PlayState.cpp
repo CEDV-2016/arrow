@@ -66,11 +66,13 @@ PlayState::exit ()
 void
 PlayState::pause()
 {
+  _timer->pause();
 }
 
 void
 PlayState::resume()
 {
+  _timer->resume();
 }
 
 bool
@@ -193,7 +195,6 @@ void PlayState::createHUD()
 {
   MyOverlayManager::getSingletonPtr()->createHUD();
   MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
-  MyOverlayManager::getSingletonPtr()->setTime( "1.59" );
   MyOverlayManager::getSingletonPtr()->setDianasLeft( "x6" );
   MyOverlayManager::getSingletonPtr()->setArrowsLeft( "x4" );
 }

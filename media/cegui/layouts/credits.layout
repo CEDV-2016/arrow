@@ -16,7 +16,7 @@
         <Window type="Vanilla/Label" name="Pedro" >
             <Property name="Area" value="{{0,0},{0,0},{0.842187,128},{0,104}}" />
             <Property name="Font" value="Jura-50" />
-            <Property name="Text" value="[colour='FF000000']Pedro Manuel Gomez-Portillo Lopez" />
+            <Property name="Text" value="[colour='FF000000']Pedro Manuel Gomez Portillo Lopez" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />

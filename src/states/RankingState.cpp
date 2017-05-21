@@ -52,7 +52,7 @@ RankingState::frameEnded
 (const Ogre::FrameEvent& evt)
 {
   if (_exitGame)
-    return false;
+  return false;
 
   return true;
 }
@@ -69,7 +69,7 @@ RankingState::keyReleased
 {
   if (e.key == OIS::KC_ESCAPE)
   {
-    _exitGame = true;
+    popState();
   }
 }
 
@@ -94,7 +94,7 @@ RankingState::mouseReleased
 RankingState*
 RankingState::getSingletonPtr ()
 {
-return msSingleton;
+  return msSingleton;
 }
 
 RankingState&
@@ -105,7 +105,7 @@ RankingState::getSingleton ()
 }
 
 void RankingState::createGUI(){
-    if(_rankingGUI == NULL){
+  if(_rankingGUI == NULL){
     //Config Window
     _rankingGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ranking.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_rankingGUI);
@@ -115,33 +115,33 @@ void RankingState::createGUI(){
     backButton->subscribeEvent(CEGUI::PushButton::EventClicked,
       CEGUI::Event::Subscriber(&RankingState::back, this));
 
-    std::vector<std::string> ranking = _rankingManager->getRanking();
-    std::string name, score;
-    for (unsigned int i=0; i<ranking.size(); i+=2){
-       name = std::string("Name") + std::to_string(i/2+1);
-       score = std::string("Point") + std::to_string(i/2+1);
-       CEGUI::Window* name_record = _rankingGUI->getChild(name);
-       name_record->setText(ranking[i]);
-       CEGUI::Window* score_record = _rankingGUI->getChild(score);
-       score_record ->setText(ranking[i+1]);
+      std::vector<std::string> ranking = _rankingManager->getRanking();
+      std::string name, score;
+      for (unsigned int i=0; i<ranking.size(); i+=2){
+        name = std::string("Name") + std::to_string(i/2+1);
+        score = std::string("Point") + std::to_string(i/2+1);
+        CEGUI::Window* name_record = _rankingGUI->getChild(name);
+        name_record->setText(ranking[i]);
+        CEGUI::Window* score_record = _rankingGUI->getChild(score);
+        score_record ->setText(ranking[i+1]);
+      }
+    } else{
+      std::vector<std::string> ranking = _rankingManager->getRanking();
+      std::string name, score;
+      for (unsigned int i=0; i<ranking.size(); i+=2){
+        name = std::string("Name") + std::to_string(i/2+1);
+        score = std::string("Point") + std::to_string(i/2+1);
+        CEGUI::Window* name_record = _rankingGUI->getChild(name);
+        name_record->setText(ranking[i]);
+        CEGUI::Window* score_record = _rankingGUI->getChild(score);
+        score_record ->setText(ranking[i+1]);
+      }
+      _rankingGUI->show();
     }
-  } else{
-    std::vector<std::string> ranking = _rankingManager->getRanking();
-    std::string name, score;
-    for (unsigned int i=0; i<ranking.size(); i+=2){
-       name = std::string("Name") + std::to_string(i/2+1);
-       score = std::string("Point") + std::to_string(i/2+1);
-       CEGUI::Window* name_record = _rankingGUI->getChild(name);
-       name_record->setText(ranking[i]);
-       CEGUI::Window* score_record = _rankingGUI->getChild(score);
-       score_record ->setText(ranking[i+1]);
-    }
-    _rankingGUI->show();
   }
-}
 
-bool RankingState::back(const CEGUI::EventArgs &e)
-{
-  popState();
-  return true;
-}
+  bool RankingState::back(const CEGUI::EventArgs &e)
+  {
+    popState();
+    return true;
+  }

@@ -2,6 +2,7 @@
 #include "NewGameState.hpp"
 #include "CreditsState.hpp"
 #include "RankingState.hpp"
+#include "InformationState.hpp"
 #include "SoundFXManager.hpp"
 #include "MapManager.hpp"
 
@@ -75,20 +76,29 @@ void MainState::mouseReleased (const OIS::MouseEvent &e, OIS::MouseButtonID id) 
 
 void MainState::createGUI()
 {
-  if(_main == NULL){
+  if(_main == NULL)
+  {
     //Config Window
     _main = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("main.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_main);
 
     //Config Buttons
-    CEGUI::Window* _newButton = _main->getChild("NewButton");
-    _newButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::newGame,this));
-    CEGUI::Window* _creditsButton = _main->getChild("CreditsButton");
-    _creditsButton->subscribeEvent(CEGUI::PushButton::EventClicked,  CEGUI::Event::Subscriber(&MainState::navigateToCredits,this));
-    CEGUI::Window* _rankingButton = _main->getChild("RankingButton");
-    _rankingButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::navigateToRanking,this));
-    CEGUI::Window* _exitButton = _main->getChild("ExitButton");
-    _exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::quit,this));
+    CEGUI::Window* aux_button;
+
+    aux_button = _main->getChild("NewButton");
+    aux_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::newGame, this));
+
+    aux_button= _main->getChild("CreditsButton");
+    aux_button->subscribeEvent(CEGUI::PushButton::EventClicked,  CEGUI::Event::Subscriber(&MainState::navigateToCredits, this));
+
+    aux_button = _main->getChild("RankingButton");
+    aux_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::navigateToRanking, this));
+
+    aux_button = _main->getChild("InformationButton");
+    aux_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::navigateToInformation, this));
+
+    aux_button = _main->getChild("ExitButton");
+    aux_button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainState::quit, this));
   }
   else
   {
@@ -112,6 +122,12 @@ bool MainState::navigateToCredits(const CEGUI::EventArgs &e)
 bool MainState::navigateToRanking(const CEGUI::EventArgs &e)
 {
   pushState(RankingState::getSingletonPtr());
+  return true;
+}
+
+bool MainState::navigateToInformation(const CEGUI::EventArgs &e)
+{
+  pushState(InformationState::getSingletonPtr());
   return true;
 }
 

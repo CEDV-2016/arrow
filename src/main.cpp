@@ -5,6 +5,7 @@
 #include "PlayState.hpp"
 #include "PauseState.hpp"
 #include "CreditsState.hpp"
+#include "InformationState.hpp"
 #include "RankingState.hpp"
 #include "EndState.hpp"
 
@@ -20,6 +21,7 @@ int main () {
   new PauseState();
   new CreditsState();
   new RankingState();
+  new InformationState();
   new EndState();
 
   try

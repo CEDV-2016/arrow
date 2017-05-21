@@ -7,29 +7,36 @@
         <Property name="VerticalAlignment" value="Centre" />
         <Property name="HorizontalAlignment" value="Centre" />
         <Window type="Vanilla/Button" name="NewButton" >
-            <Property name="Area" value="{{0,0},{0,-175},{0,1000},{0,0}}" />
-            <Property name="Font" value="Jura-75" />
+            <Property name="Area" value="{{0,0},{0,-225},{0,1000},{0,0}}" />
+            <Property name="Font" value="Jura-65" />
             <Property name="Text" value="[colour='FF000000']NUEVA PARTIDA" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
+        <Window type="Vanilla/Button" name="InformationButton" >
+            <Property name="Area" value="{{0,0},{0,-100},{0,1000},{0,100}}" />
+            <Property name="Font" value="Jura-65" />
+            <Property name="Text" value="[colour='FF000000']INFORMACION" />
+            <Property name="VerticalAlignment" value="Centre" />
+            <Property name="HorizontalAlignment" value="Centre" />
+        </Window>
         <Window type="Vanilla/Button" name="RankingButton" >
-            <Property name="Area" value="{{0,0},{0,-45},{0,1000},{0,100}}" />
-            <Property name="Font" value="Jura-75" />
+            <Property name="Area" value="{{0,0},{0,25},{0,1000},{0,175}}" />
+            <Property name="Font" value="Jura-65" />
             <Property name="Text" value="[colour='FF000000']RANKINGS" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="CreditsButton" >
-            <Property name="Area" value="{{0,0},{0,100},{0,690},{0,250}}" />
-            <Property name="Font" value="Jura-75" />
+            <Property name="Area" value="{{0,0},{0,150},{0,690},{0,250}}" />
+            <Property name="Font" value="Jura-65" />
             <Property name="Text" value="[colour='FF000000']CREDITOS" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="ExitButton" >
-            <Property name="Area" value="{{0,0},{0,235},{0,698},{0,350}}" />
-            <Property name="Font" value="Jura-75" />
+            <Property name="Area" value="{{0,0},{0,275},{0,698},{0,400}}" />
+            <Property name="Font" value="Jura-65" />
             <Property name="Text" value="[colour='FF000000']SALIR" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />

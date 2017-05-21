@@ -1,0 +1,16 @@
+InformationOverlay
+{
+  zorder 500
+
+  container Panel(informationPanel)
+  {
+    metrics_mode pixels
+    left 0
+    top -50
+    width 1311
+    height 711
+    horz_align left
+    vert_align top
+    material informationMaterial
+  }
+}

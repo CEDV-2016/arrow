@@ -71,6 +71,10 @@ void
 NewGameState::keyReleased
 (const OIS::KeyEvent &e)
 {
+  if (e.key == OIS::KC_ESCAPE)
+  {
+    popState();
+  }
 }
 
 void

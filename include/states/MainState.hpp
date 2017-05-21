@@ -37,6 +37,7 @@ public:
   bool newGame(const CEGUI::EventArgs &e);
   bool navigateToCredits(const CEGUI::EventArgs &e);
   bool navigateToRanking(const CEGUI::EventArgs &e);
+  bool navigateToInformation(const CEGUI::EventArgs &e);
   bool quit(const CEGUI::EventArgs &e);
 
 private:

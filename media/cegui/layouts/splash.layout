@@ -7,7 +7,7 @@
         <Property name="AspectRatio" value="1.8" />
         <Window type="Vanilla/Label" name="ContinueText" >
             <Property name="Area" value="{{0,0},{0,-64},{0,1268},{0,12}}" />
-            <Property name="Font" value="Jura-45" />
+            <Property name="Font" value="Jura-50" />
             <Property name="Text" value="[colour='FF000000']Pulsa espacio" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="VerticalAlignment" value="Bottom" />

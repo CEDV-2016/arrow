@@ -66,7 +66,7 @@ CreditsState::keyReleased
 {
   if (e.key == OIS::KC_ESCAPE)
   {
-    _exitGame = true;
+    popState();
   }
 }
 
@@ -101,17 +101,20 @@ CreditsState::getSingleton ()
   return *msSingleton;
 }
 
-void CreditsState::createGUI(){
-  if(_creditsGUI == NULL){
+void CreditsState::createGUI()
+{
+  if(_creditsGUI == NULL)
+  {
     //Config Window
     _creditsGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("credits.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_creditsGUI);
 
     //Config buttons
     CEGUI::Window* backButton = _creditsGUI->getChild("BackButton");
-    backButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-      CEGUI::Event::Subscriber(&CreditsState::back, this));
-  } else{
+    backButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&CreditsState::back, this));
+  }
+  else
+  {
     _creditsGUI->show();
   }
 }
