@@ -2,6 +2,7 @@
 #include "MainState.hpp"
 #include "MapManager.hpp"
 #include "MyOverlayManager.hpp"
+#include "CameraManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
@@ -42,6 +43,7 @@ IntroState::enter ()
 
   new MapManager( _sceneMgr );
   new MyOverlayManager();
+  new CameraManager( _sceneMgr);
 
   createGUI();
   loadBackgroundImage();

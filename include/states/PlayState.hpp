@@ -15,6 +15,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MapManager.hpp"
+#include "CameraManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -65,6 +66,7 @@ protected:
   MapManager * _mapManager;
   std::string _name;
   Timer * _timer;
+  CameraManager * _camManager;
 
   bool _exitGame;
   bool _evenFrame;

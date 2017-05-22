@@ -23,6 +23,7 @@ PlayState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   _mapManager = MapManager::getSingletonPtr();
+  _camManager = CameraManager::getSingletonPtr();
 
   _sceneMgr->clearScene(); //deleting background image
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");
@@ -34,22 +35,7 @@ PlayState::enter ()
   createScene();
   createHUD();
 
-  Ogre::SceneNode *_node = _sceneMgr->getSceneNode("Player");
-  this->cameraNode = _node->createChildSceneNode();
-  this->cameraNode->setPosition(0, 0.5, 0);
-  // Create the camera's yaw node as a child of camera's top node.
-  this->cameraYawNode = this->cameraNode->createChildSceneNode();
-  //Ogre::Entity* playerEntity = _sceneMgr->createEntity("Player", "Player.mesh");
-  //this->cameraYawNode->attachObject(playerEntity);
-  // Create the camera's pitch node as a child of camera's yaw node.
-  this->cameraPitchNode = this->cameraYawNode->createChildSceneNode();
-  this->cameraPitchNode->attachObject(this->_camera);
-
-  moveScale = 0.01f;
-  rotateScale = 1;
-  rotX = 0;
-  rotY = 0;
-  translateVector = Ogre::Vector3::ZERO;
+  _camManager->initCamera();
 
   _exitGame = false;
 }
@@ -85,7 +71,7 @@ PlayState::frameStarted
 
   MyOverlayManager::getSingletonPtr()->setTime( _timer->getGameplayTime() );
 
-  moveCamera();
+  _camManager->moveCamera();
 
   return true;
 }
@@ -108,18 +94,7 @@ void
 PlayState::keyPressed
 (const OIS::KeyEvent &e)
 {
-    if(e.key == OIS::KC_UP){
-      this->translateVector.z = -(this->moveScale);
-    }
-    if(e.key == OIS::KC_DOWN){
-      this->translateVector.z = this->moveScale;
-    }
-    if(e.key == OIS::KC_LEFT){
-      this->translateVector.x = -(this->moveScale);
-    }
-    if(e.key == OIS::KC_RIGHT){
-      this->translateVector.x = this->moveScale;
-    }
+  _camManager->keyPressed(e);
 }
 
 void
@@ -128,34 +103,14 @@ PlayState::keyReleased
 {
   if (e.key == OIS::KC_ESCAPE) pushState(PauseState::getSingletonPtr());
 
-  if(e.key == OIS::KC_UP || e.key == OIS::KC_DOWN){
-    this->translateVector.z = 0;
-  }
-  if(e.key == OIS::KC_LEFT || e.key == OIS::KC_RIGHT){
-    this->translateVector.x = 0;
-  }
+  _camManager->keyReleased(e);
 }
 
 void
 PlayState::mouseMoved
 (const OIS::MouseEvent &e)
 {
-  rotX = Ogre::Degree(-e.state.X.rel);
-  rotY = Ogre::Degree(-e.state.Y.rel);
-
-  // Yaws the camera according to the mouse relative movement.
-	this->cameraYawNode->yaw(this->rotX);
-
-  // Pitches the camera according to the mouse relative movement.
-	Ogre::Real pitchAng = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
-  Ogre::Real pitchAngSig = this->cameraPitchNode->getOrientation().x;
-  Ogre::Real pitchDegree = rotY.valueDegrees();
-  if (((pitchAng < 15.0f && pitchAngSig >= 0) ||
- 		 (pitchAng > 15.0f && pitchAngSig >= 0 && pitchDegree < 0)) ||
- 		  ((pitchAng < 10.0f && pitchAngSig < 0) ||
-      (pitchAng > 10.0f && pitchAngSig < 0 && pitchDegree > 0))) {
-	 			this->cameraPitchNode->pitch(this->rotY);
-	 }
+  _camManager->mouseMoved(e);
 }
 
 void
@@ -197,13 +152,6 @@ void PlayState::createHUD()
   MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
   MyOverlayManager::getSingletonPtr()->setDianasLeft( "x6" );
   MyOverlayManager::getSingletonPtr()->setArrowsLeft( "x4" );
-}
-
-void PlayState::moveCamera()
-{
-  this->cameraNode->translate(this->cameraYawNode->getOrientation() *
-                             translateVector,
-                             Ogre::SceneNode::TS_LOCAL);
 }
 
 void PlayState::setPlayerName(std::string name)
