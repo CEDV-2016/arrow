@@ -1,9 +1,9 @@
-Arrow
+/Arrow
 obj/*
 *.o
 *~
 *.log
-blender/*.blend1
+*.blend1
 *.scene
 core
 *.gch
