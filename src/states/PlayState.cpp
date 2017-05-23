@@ -10,7 +10,7 @@ PlayState::PlayState()
 {
   _game = new Game();
   _playGUI = NULL;
-  _timer = new Timer();
+  _timer = new MyTimer();
 }
 
 void
@@ -24,6 +24,7 @@ PlayState::enter ()
   _camera = _sceneMgr->getCamera("MainCamera");
   _mapManager = MapManager::getSingletonPtr();
   _camManager = CameraManager::getSingletonPtr();
+  _shootManager = ShootManager::getSingletonPtr();
 
   _sceneMgr->clearScene(); //deleting background image
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");

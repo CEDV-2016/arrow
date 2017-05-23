@@ -1,6 +1,6 @@
-#include "Timer.hpp"
+#include "MyTimer.hpp"
 
-Timer::Timer()
+MyTimer::MyTimer()
 {
   _started_at = 0;
   _paused_at = 0;
@@ -8,9 +8,9 @@ Timer::Timer()
   _paused = false;
 }
 
-Timer::~Timer() {}
+MyTimer::~MyTimer() {}
 
-Ogre::String Timer::getGameplayTime()
+Ogre::String MyTimer::getGameplayTime()
 {
   Ogre::String time = "";
   clock_t total_cycles = _started_at - clock();
@@ -43,14 +43,14 @@ Ogre::String Timer::getGameplayTime()
   return time;
 }
 
-void Timer::start()
+void MyTimer::start()
 {
   _started = true;
   _paused = false;
   _started_at = clock();
 }
 
-void Timer::pause()
+void MyTimer::pause()
 {
   if ( !_paused )
   {
@@ -59,7 +59,7 @@ void Timer::pause()
   }
 }
 
-void Timer::resume()
+void MyTimer::resume()
 {
   if( _paused )
   {
@@ -68,7 +68,7 @@ void Timer::resume()
   }
 }
 
-void Timer::stop()
+void MyTimer::stop()
 {
   _started = false;
 }

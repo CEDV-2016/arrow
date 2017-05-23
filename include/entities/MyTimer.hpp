@@ -4,11 +4,11 @@
 #include <time.h>  /* CLOCKS_PER_SEC */
 #include <Ogre.h>
 
-class Timer
+class MyTimer
 {
 public:
-  Timer();
-  ~Timer();
+  MyTimer();
+  ~MyTimer();
 
   void start();
   void pause();

@@ -11,11 +11,12 @@
 #include <string>
 #include <vector>
 
-#include "Timer.hpp"
+#include "MyTimer.hpp"
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "MapManager.hpp"
 #include "CameraManager.hpp"
+#include "ShootManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -65,8 +66,9 @@ protected:
   Game *_game;
   MapManager * _mapManager;
   std::string _name;
-  Timer * _timer;
+  MyTimer * _timer;
   CameraManager * _camManager;
+  ShootManager * _shootManager;
 
   bool _exitGame;
   bool _evenFrame;
