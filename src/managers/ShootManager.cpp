@@ -68,7 +68,6 @@ void ShootManager::initWorld()
 
 void ShootManager::shootBall()
 {
-  Vector3 size = Vector3::ZERO;
   Vector3 position = (_camera->getDerivedPosition()
      + _camera->getDerivedDirection().normalisedCopy() * 10);
 
@@ -98,7 +97,7 @@ void ShootManager::shootBall()
 		     Quaternion::IDENTITY /* Orientacion */);
 
   rigidBody->setLinearVelocity(
-     _camera->getDerivedDirection().normalisedCopy() * 30.0);
+     _camera->getDerivedDirection().normalisedCopy() * 10.0);
 
   _numEntities++;
 

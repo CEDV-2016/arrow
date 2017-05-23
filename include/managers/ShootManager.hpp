@@ -18,6 +18,10 @@ public:
   ShootManager( Ogre::SceneManager * sceneMgr);
   ~ShootManager();
 
+  void initWorld();
+  void shootBall();
+  void stepSimulation(Real delta);
+
   // Inherited from Ogre::Singleton.
   static ShootManager& getSingleton ();
   static ShootManager* getSingletonPtr ();
@@ -32,8 +36,4 @@ protected:
 
   std::deque <OgreBulletDynamics::RigidBody *>         _bodies;
   std::deque <OgreBulletCollisions::CollisionShape *>  _shapes;
-
-  void initWorld();
-  void shootBall();
-  void stepSimulation(Real delta);
 };
