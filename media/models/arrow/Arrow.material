@@ -1,16 +1,16 @@
-// Texture genrated by blender2ogre 0.6.0
+// Arrow genrated by blender2ogre 0.6.0
 
-material Texture 
+material Arrow 
 {
     receive_shadows on 
 
     technique
     {
-        pass Texture
+        pass Arrow
         {
-            ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
-            diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
-            specular 0.05000000074505806 0.05000000074505806 0.05000000074505806 1.0 12.5
+            ambient 0.8 0.8 0.8 1.0
+            diffuse 0.64 0.64 0.64 1.0
+            specular 0.025 0.025 0.025 1.0 12.5
             emissive 0.0 0.0 0.0 1.0
 
             alpha_to_coverage off
@@ -32,7 +32,7 @@ material Texture
 
             texture_unit 
             {
-                texture Arrow_baked.png
+                texture Arrow_baked.jpg
                 tex_address_mode wrap
                 scale 1.0 1.0
                 colour_op modulate
