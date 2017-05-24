@@ -3,9 +3,10 @@
 #include <iostream>
 
 RoomMap::RoomMap(Ogre::SceneManager * sceneMgr, OgreBulletDynamics::DynamicsWorld * world) :
-  _sceneMgr( sceneMgr ),
-  _world( world )
-  {}
+_sceneMgr( sceneMgr ),
+_world( world )
+{
+}
 
 RoomMap::~RoomMap() {}
 
@@ -33,15 +34,16 @@ void RoomMap::create()
   room_node->attachObject( room_entity );
   _sceneMgr->getRootSceneNode()->addChild( room_node );
 
-  // Creating the physic world
+  // Creating the physic room
   OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new OgreBulletCollisions::StaticMeshToShapeConverter( room_entity );
 
-  OgreBulletCollisions::TriangleMeshCollisionShape *trackTrimesh = trimeshConverter->createTrimesh();
+  OgreBulletCollisions::TriangleMeshCollisionShape *room_trimesh = trimeshConverter->createTrimesh();
 
-  OgreBulletDynamics::RigidBody *rigidTrack = new OgreBulletDynamics::RigidBody( "Room", _world );
-                                    // Restitucion, friccion y masa
-  rigidTrack->setShape( room_node, trackTrimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
+  OgreBulletDynamics::RigidBody *physic_room = new OgreBulletDynamics::RigidBody( "Room", _world );
+  // Restitucion, friccion y masa
+  physic_room->setShape( room_node, room_trimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
 
+  loadDartboards();
 
   // Bola de prueba
   Ogre::Entity *entity = _sceneMgr->createEntity("balldeprueba", "ball.mesh");
@@ -52,12 +54,58 @@ void RoomMap::create()
   OgreBulletCollisions::SphereCollisionShape *ballShape = new OgreBulletCollisions::SphereCollisionShape( 0.5 );
   OgreBulletDynamics::RigidBody *rigidBall = new OgreBulletDynamics::RigidBody("balldeprueba", _world);
 
-  Ogre::Vector3 pos = Ogre::Vector3(-8.5, 10, -8.7);
-  rigidBall->setShape(node, ballShape, 0.05, 0.05, 0.3, pos, Ogre::Quaternion::IDENTITY);
+  Ogre::Vector3 position = Ogre::Vector3(-8.5, 10, -8.7);
+  rigidBall->setShape(node, ballShape, 0.05, 0.05, 0.3, position, Ogre::Quaternion::IDENTITY);
 }
 
 void RoomMap::destroy()
 {
   _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( "Room" ) );
   _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( "RoomLight" ) );
+
+  std::stringstream dartboard_name;
+  dartboard_name.str("");
+  for (int i=1; i<=5; i++)
+  {
+    dartboard_name << "Dartboard" << i;
+    _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( dartboard_name.str() ) );
+    dartboard_name.str("");
+  }
+}
+
+
+void RoomMap::loadDartboards()
+{
+  std::stringstream filename;
+  filename.str("");
+
+  for (int i=1; i<=5; i++)
+  {
+    filename << "Dartboard" << i << ".mesh";
+    loadSingleDartboard( filename.str() );
+    filename.str("");
+  }
+}
+
+Ogre::SceneNode * RoomMap::loadSingleDartboard( std::string dartboard_file )
+{
+
+  Ogre::Entity * dartboard_entity;
+  Ogre::SceneNode * dartboard_node;
+
+  std::stringstream dartboard_name;
+  dartboard_name << "Dartboard" << _dartboard_counter;
+  _dartboard_counter++;
+
+  dartboard_entity  = _sceneMgr->createEntity( dartboard_name.str(), dartboard_file );
+  dartboard_node = _sceneMgr->createSceneNode( dartboard_name.str() );
+  dartboard_node->attachObject( dartboard_entity );
+  _sceneMgr->getRootSceneNode()->addChild( dartboard_node );
+
+  OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new OgreBulletCollisions::StaticMeshToShapeConverter( dartboard_entity );
+  OgreBulletCollisions::TriangleMeshCollisionShape *dartboard_trimesh = trimeshConverter->createTrimesh();
+  OgreBulletDynamics::RigidBody *physic_dartboard = new OgreBulletDynamics::RigidBody( dartboard_name.str(), _world );
+  physic_dartboard->setShape( dartboard_node, dartboard_trimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY );
+
+  return dartboard_node;
 }

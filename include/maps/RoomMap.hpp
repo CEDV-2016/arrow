@@ -11,7 +11,12 @@ public:
   void create();
   void destroy();
 
+  void loadDartboards();
+  Ogre::SceneNode * loadSingleDartboard( std::string dartboard_file );
+
 private:
   Ogre::SceneManager * _sceneMgr;
   OgreBulletDynamics::DynamicsWorld * _world;
+
+  int _dartboard_counter = 0;
 };

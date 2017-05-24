@@ -158,7 +158,7 @@ void PlayState::createHUD()
 {
   MyOverlayManager::getSingletonPtr()->createHUD();
   MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
-  MyOverlayManager::getSingletonPtr()->setDianasLeft( "x6" );
+  MyOverlayManager::getSingletonPtr()->setDianasLeft( "x5" );
   MyOverlayManager::getSingletonPtr()->setArrowsLeft( "x4" );
 }
 
