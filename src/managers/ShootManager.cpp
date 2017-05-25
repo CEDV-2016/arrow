@@ -3,6 +3,7 @@
 #include "Shapes/OgreBulletCollisionsConvexHullShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+#include "Shapes/OgreBulletCollisionsSphereShape.h"
 #include "OgreBulletCollisionsRay.h"
 #include "MyPhysicsManager.hpp"
 
@@ -61,23 +62,17 @@ void ShootManager::shootBall()
 {
   Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
 
-  Entity *entity = NULL;
-  entity = _sceneMgr->createEntity("Ball" + StringConverter::toString(_numEntities), "ball.mesh");
-
+  Entity *entity = _sceneMgr->createEntity("Ball" + StringConverter::toString(_numEntities), "ball.mesh");
   SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
   node->attachObject(entity);
+  node->setScale(0.2, 0.2, 0.2);
 
-  OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = NULL;
-  OgreBulletCollisions::CollisionShape *bodyShape = NULL;
-  OgreBulletDynamics::RigidBody *rigidBody = NULL;
+  OgreBulletCollisions::CollisionShape *bodyShape = new OgreBulletCollisions::SphereCollisionShape( 0.2 );
+  OgreBulletDynamics::RigidBody *rigidBody =
+    new OgreBulletDynamics::RigidBody("rigidBody" + StringConverter::toString(_numEntities), _world);
 
-  trimeshConverter = new OgreBulletCollisions::StaticMeshToShapeConverter(entity);
-  bodyShape = trimeshConverter->createConvex();
-
-  rigidBody = new OgreBulletDynamics::RigidBody("rigidBody" + StringConverter::toString(_numEntities), _world);
   // Restitucion, friccion y masa
   rigidBody->setShape(node, bodyShape, 0.6, 0.6, 5.0 , position, Quaternion::IDENTITY);
-
   rigidBody->setLinearVelocity( _camera->getDerivedDirection().normalisedCopy() * 10.0);
 
   _numEntities++;
