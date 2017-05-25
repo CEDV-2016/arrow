@@ -70,7 +70,6 @@ PlayState::frameStarted
   Ogre::Real deltaT = evt.timeSinceLastFrame;
 
   _mapManager->update( deltaT );
-  _shootManager->stepSimulation(deltaT);
 
   MyOverlayManager::getSingletonPtr()->setTime( _timer->getGameplayTime() );
 
@@ -83,8 +82,6 @@ bool
 PlayState::frameEnded
 (const Ogre::FrameEvent& evt)
 {
-  Real deltaT = evt.timeSinceLastFrame;
-  _shootManager->stepSimulation(deltaT);
   if (_exitGame)
   {
     return false;

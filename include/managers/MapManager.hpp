@@ -28,6 +28,8 @@ public:
   void destroyAllMaps();
   void update( Ogre::Real deltaT );
 
+  OgreBulletDynamics::DynamicsWorld * getPhysicWorld();
+
   // Inherited from Ogre::Singleton.
   static MapManager& getSingleton ();
   static MapManager* getSingletonPtr ();

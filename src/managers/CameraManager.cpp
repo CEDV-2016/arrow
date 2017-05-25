@@ -70,7 +70,7 @@ void CameraManager::initCamera()
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");
   cam->setPosition( Ogre::Vector3(0, 1, 2) );
   //_sceneMgr->getCamera("MainCamera")->lookAt( Ogre::Vector3(-5, 5, -9) );
-  cam->setNearClipDistance(0.001);
+  cam->setNearClipDistance(0.0001);
   cam->setFarClipDistance(10000);
 
   Ogre::SceneNode *_node = _sceneMgr->getSceneNode("Player");

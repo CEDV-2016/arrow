@@ -20,7 +20,6 @@ public:
 
   void initWorld();
   void shootBall();
-  void stepSimulation(Real delta);
 
   // Inherited from Ogre::Singleton.
   static ShootManager& getSingleton ();

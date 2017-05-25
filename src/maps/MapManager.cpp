@@ -102,6 +102,11 @@ void MapManager::destroyAllMaps()
   }
 }
 
+OgreBulletDynamics::DynamicsWorld * MapManager::getPhysicWorld()
+{
+  return _world;
+}
+
 MapManager& MapManager::getSingleton() {
   assert(msSingleton);
   return (*msSingleton);
