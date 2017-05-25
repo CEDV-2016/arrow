@@ -1,6 +1,7 @@
 #include "IntroState.hpp"
 #include "MainState.hpp"
 #include "MapManager.hpp"
+#include "MyPhysicsManager.hpp"
 #include "MyOverlayManager.hpp"
 #include "CameraManager.hpp"
 #include "ShootManager.hpp"
@@ -42,7 +43,8 @@ IntroState::enter ()
   _sceneMgr->setShadowTextureCount(30);
   _sceneMgr->setShadowTextureSize(512);
 
-  new MapManager( _sceneMgr );
+  new MyPhysicsManager( _sceneMgr );
+  new MapManager( _sceneMgr, MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
   new MyOverlayManager();
   new CameraManager( _sceneMgr);
   new ShootManager( _sceneMgr);

@@ -2,7 +2,6 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
-#include "MyOverlayManager.hpp"
 
 template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
@@ -23,6 +22,8 @@ PlayState::enter ()
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
   _mapManager = MapManager::getSingletonPtr();
+  _overlayManager = MyOverlayManager::getSingletonPtr();
+  _physicsManager = MyPhysicsManager::getSingletonPtr();
   _camManager = CameraManager::getSingletonPtr();
   _shootManager = ShootManager::getSingletonPtr();
 
@@ -70,8 +71,9 @@ PlayState::frameStarted
   Ogre::Real deltaT = evt.timeSinceLastFrame;
 
   _mapManager->update( deltaT );
-
-  MyOverlayManager::getSingletonPtr()->setTime( _timer->getGameplayTime() );
+  _physicsManager->update( deltaT );
+  
+  _overlayManager->setTime( _timer->getGameplayTime() );
 
   _camManager->moveCamera();
 
@@ -120,7 +122,7 @@ PlayState::mousePressed
 (const OIS::MouseEvent &e, OIS::MouseButtonID id)
 {
   //if (e.key == OIS::MB_Left) {
-    _shootManager->shootBall();
+  _shootManager->shootBall();
   //}
 }
 
@@ -153,10 +155,10 @@ void PlayState::createScene()
 
 void PlayState::createHUD()
 {
-  MyOverlayManager::getSingletonPtr()->createHUD();
-  MyOverlayManager::getSingletonPtr()->setPlayerName( "Pedro" );
-  MyOverlayManager::getSingletonPtr()->setDianasLeft( "x5" );
-  MyOverlayManager::getSingletonPtr()->setArrowsLeft( "x4" );
+  _overlayManager->createHUD();
+  _overlayManager->setPlayerName( "Pedro" );
+  _overlayManager->setDianasLeft( "x5" );
+  _overlayManager->setArrowsLeft( "x4" );
 }
 
 void PlayState::setPlayerName(std::string name)

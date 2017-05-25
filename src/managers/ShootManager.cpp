@@ -4,7 +4,7 @@
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
 #include "OgreBulletCollisionsRay.h"
-#include "MapManager.hpp"
+#include "MyPhysicsManager.hpp"
 
 template<> ShootManager* Ogre::Singleton<ShootManager>::msSingleton = 0;
 
@@ -13,7 +13,7 @@ ShootManager::ShootManager( Ogre::SceneManager * sceneMgr)
   _sceneMgr = sceneMgr;
   _camera = _sceneMgr->getCamera("MainCamera");
 
-  _world = MapManager::getSingletonPtr()->getPhysicWorld();
+  _world = MyPhysicsManager::getSingletonPtr()->getPhysicWorld();
 }
 
 ShootManager::~ShootManager()

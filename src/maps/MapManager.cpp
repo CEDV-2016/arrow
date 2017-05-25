@@ -2,49 +2,35 @@
 
 template<> MapManager* Ogre::Singleton<MapManager>::msSingleton = 0;
 
-MapManager::MapManager( Ogre::SceneManager * sceneMgr )
+MapManager::MapManager( Ogre::SceneManager * sceneMgr, OgreBulletDynamics::DynamicsWorld * pyhsicWorld )
 {
   _sceneMgr = sceneMgr;
+  _pyhsicWorld = pyhsicWorld;
   _currentMap = enumerations::Maps::NONE;
   _fader = new Fader();
-
-  Ogre::AxisAlignedBox worldBounds = Ogre::AxisAlignedBox( Ogre::Vector3 (-100, -100, -100), Ogre::Vector3 (100,  100,  100) );
-  Ogre::Vector3 gravity = Ogre::Vector3( 0, -9.8, 0 );
-  _world = new OgreBulletDynamics::DynamicsWorld( _sceneMgr, worldBounds, gravity );
-
-  _debugDrawer = new OgreBulletCollisions::DebugDrawer();
-  _debugDrawer->setDrawWireframe( true );
-  Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode("debugNode", Ogre::Vector3::ZERO);
-  node->attachObject(static_cast <Ogre::SimpleRenderable *>( _debugDrawer ));
-
-  _world->setDebugDrawer(_debugDrawer);
-
-  #ifdef _DEBUG
-  _world->setShowDebugShapes(true); // paint green wires around physic bodies
-  #endif
 
   initMaps();
 }
 
 MapManager::~MapManager()
 {
+  _currentMap = enumerations::Maps::NONE;
   destroyAllMaps();
-  delete _debugDrawer;
-  delete _world;
 
   _sceneMgr = nullptr;
+  _pyhsicWorld = nullptr;
+  _fader = nullptr;
 }
 
 void MapManager::initMaps()
 {
-  _maps[ enumerations::Maps::ROOM ] = MapPtr( new RoomMap( _sceneMgr, _world ) );
+  _maps[ enumerations::Maps::ROOM ] = MapPtr( new RoomMap( _sceneMgr, _pyhsicWorld ) );
   // Here will go the declaration of the rest of the maps the game is using
 }
 
 void MapManager::update( Ogre::Real deltaT )
 {
   _fader->update( deltaT );
-  _world->stepSimulation( deltaT );
 }
 
 /*
@@ -102,17 +88,14 @@ void MapManager::destroyAllMaps()
   }
 }
 
-OgreBulletDynamics::DynamicsWorld * MapManager::getPhysicWorld()
+MapManager& MapManager::getSingleton()
 {
-  return _world;
-}
-
-MapManager& MapManager::getSingleton() {
   assert(msSingleton);
   return (*msSingleton);
 }
 
-MapManager* MapManager::getSingletonPtr() {
+MapManager* MapManager::getSingletonPtr()
+{
   assert(msSingleton);
   return msSingleton;
 }

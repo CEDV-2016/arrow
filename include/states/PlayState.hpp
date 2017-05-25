@@ -17,6 +17,8 @@
 #include "MapManager.hpp"
 #include "CameraManager.hpp"
 #include "ShootManager.hpp"
+#include "MyPhysicsManager.hpp"
+#include "MyOverlayManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -65,6 +67,9 @@ protected:
   CEGUI::Window* _playGUI, *_nameView, *_scoreView, *_life1View, *_life2View, *_life3View;
   Game *_game;
   MapManager * _mapManager;
+  MyPhysicsManager * _physicsManager;
+  MyOverlayManager * _overlayManager;
+
   std::string _name;
   MyTimer * _timer;
   CameraManager * _camManager;

@@ -4,21 +4,23 @@
 
 #include <Ogre.h>
 #include <OgreSingleton.h>
+
 #include <OgreBulletDynamicsRigidBody.h>
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
 #include <Shapes/OgreBulletCollisionsBoxShape.h>
 
-#include "Fader.hpp"
 #include "Map.hpp"
+#include "Fader.hpp"
 #include "RoomMap.hpp"
 #include "Enumerations.hpp"
+#include "MyPhysicsManager.hpp"
 
 class MapManager : public Ogre::Singleton<MapManager>
 {
 public:
   typedef std::shared_ptr<Map> MapPtr;
 
-  MapManager( Ogre::SceneManager * sceneMgr );
+  MapManager( Ogre::SceneManager * sceneMgr, OgreBulletDynamics::DynamicsWorld * _pyhsicWorld );
   ~MapManager();
 
   void changeMap(enumerations::Maps id, bool fade);
@@ -41,8 +43,7 @@ private:
   Fader * _fader;
   Ogre::SceneManager * _sceneMgr;
 
-  OgreBulletDynamics::DynamicsWorld * _world;
-  OgreBulletCollisions::DebugDrawer * _debugDrawer;
+  OgreBulletDynamics::DynamicsWorld * _pyhsicWorld;
 
   void initMaps();
 };
