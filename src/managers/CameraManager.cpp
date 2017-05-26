@@ -1,5 +1,7 @@
 #include "CameraManager.hpp"
 
+using namespace std;
+
 template<> CameraManager* Ogre::Singleton<CameraManager>::msSingleton = 0;
 
 CameraManager::CameraManager( Ogre::SceneManager * sceneMgr )
@@ -18,16 +20,16 @@ CameraManager::keyPressed
 (const OIS::KeyEvent &e)
 {
     if(e.key == OIS::KC_UP){
-      this->translateVector.z = -(this->moveScale);
-    }
-    if(e.key == OIS::KC_DOWN){
       this->translateVector.z = this->moveScale;
     }
+    if(e.key == OIS::KC_DOWN){
+      this->translateVector.z = -(this->moveScale);
+    }
     if(e.key == OIS::KC_LEFT){
-      this->translateVector.x = -(this->moveScale);
+      this->translateVector.x = this->moveScale;
     }
     if(e.key == OIS::KC_RIGHT){
-      this->translateVector.x = this->moveScale;
+      this->translateVector.x = -(this->moveScale);
     }
 }
 
@@ -57,10 +59,12 @@ CameraManager::mouseMoved
 	Ogre::Real pitchAng = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
   Ogre::Real pitchAngSig = this->cameraPitchNode->getOrientation().x;
   Ogre::Real pitchDegree = rotY.valueDegrees();
-  if (((pitchAng < 25.0f && pitchAngSig >= 0) ||
- 		 (pitchAng > 25.0f && pitchAngSig >= 0 && pitchDegree < 0)) ||
- 		  ((pitchAng < 10.0f && pitchAngSig < 0) ||
-      (pitchAng > 10.0f && pitchAngSig < 0 && pitchDegree > 0))) {
+
+  cout << pitchAng << "  -> " << pitchAngSig << "  ->  " << pitchDegree << endl;
+  if (((pitchAng < 179.030f && pitchAngSig >= 0) ||
+ 		 (pitchAng > 179.030f && pitchAngSig >= 0 && pitchDegree < 0)) ||
+ 		  ((pitchAng < 179.010f && pitchAngSig < 0) ||
+      (pitchAng > 179.010f && pitchAngSig < 0 && pitchDegree > 0))) {
 	 			this->cameraPitchNode->pitch(this->rotY);
 	 }
 }
@@ -81,9 +85,11 @@ void CameraManager::initCamera()
   Ogre::Entity* playerEntity = _sceneMgr->createEntity("Player", "Arrow.mesh");
   this->cameraYawNode->attachObject(playerEntity);
   this->cameraYawNode->setScale(0.05, 0.05, 0.05);
+
   // Create the camera's pitch node as a child of camera's yaw node.
   this->cameraPitchNode = this->cameraYawNode->createChildSceneNode();
   this->cameraPitchNode->attachObject(cam);
+  this->cameraPitchNode->yaw(Ogre::Degree(179));
 }
 
 void CameraManager::moveCamera()

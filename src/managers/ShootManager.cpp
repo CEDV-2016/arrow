@@ -60,7 +60,7 @@ void ShootManager::initWorld()
 
 void ShootManager::shootBall()
 {
-  Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+  Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 2);
 
   Entity *entity = _sceneMgr->createEntity("Ball" + StringConverter::toString(_numEntities), "ball.mesh");
   SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
@@ -73,7 +73,7 @@ void ShootManager::shootBall()
 
   // Restitucion, friccion y masa
   rigidBody->setShape(node, bodyShape, 0.6, 0.6, 5.0 , position, Quaternion::IDENTITY);
-  rigidBody->setLinearVelocity( _camera->getDerivedDirection().normalisedCopy() * 10.0);
+  rigidBody->setLinearVelocity( _camera->getDerivedDirection().normalisedCopy() * 20.0);
 
   _numEntities++;
 
