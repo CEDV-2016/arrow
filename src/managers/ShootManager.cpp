@@ -83,7 +83,7 @@ void ShootManager::shootBall()
   _bodies.push_back(rigidBody);
 
   PlayState* playState = PlayState::getSingletonPtr();
-  playState-> updateArrows();
+  playState-> updateBalls();
 }
 
 ShootManager& ShootManager::getSingleton() {

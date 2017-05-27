@@ -51,8 +51,8 @@ public:
   void moveCamera();
 
   void setPlayerName(std::string name);
-  void updateDianas();
-  void updateArrows();
+  void updateDartboards();
+  void updateBalls();
 
   void endGame(bool win);
 

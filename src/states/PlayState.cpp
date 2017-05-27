@@ -177,13 +177,13 @@ void PlayState::setPlayerName(std::string name)
   _game->setPlayerName( name );
 }
 
-void PlayState::updateDianas()
+void PlayState::updateDartboards()
 {
   _game->hitDartboard();
   _overlayManager->setDartboardsLeft(_game->getDartboartdsLeft());
 }
 
-void PlayState::updateArrows()
+void PlayState::updateBalls()
 {
   _game->shootBall();
   _overlayManager->setBallsLeft( _game->getBallsLeft());
