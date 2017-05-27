@@ -1,4 +1,4 @@
-material Materials/OverlayMaterial
+material Materials/BlackFader
  {
      technique
      {

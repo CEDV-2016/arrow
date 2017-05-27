@@ -16,8 +16,8 @@ template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
 PlayState::PlayState()
 {
-  _game = new Game();
   _playGUI = NULL;
+  _game = new Game();
   _timer = new MyTimer();
 }
 
@@ -167,26 +167,24 @@ void PlayState::createScene()
 void PlayState::createHUD()
 {
   _overlayManager->createHUD();
-  _overlayManager->setPlayerName( _name );
-  _overlayManager->setDianasLeft( "x5" );
-  _overlayManager->setArrowsLeft( "x8" );
+  _overlayManager->setPlayerName( _game->getPlayerName() );
+  _overlayManager->setDartboardsLeft( _game->getDartboartdsLeft() );
+  _overlayManager->setBallsLeft( _game->getBallsLeft() );
 }
 
-void PlayState::setPlayerName(std::string playerName)
+void PlayState::setPlayerName(std::string name)
 {
-  _name = playerName;
+  _game->setPlayerName( name );
 }
 
 void PlayState::updateDianas()
 {
-  std::stringstream numDianas;
-  numDianas << "x" << dianasLeft--;
-  _overlayManager->setDianasLeft( numDianas.str());
+  _game->hitDartboard();
+  _overlayManager->setDartboardsLeft(_game->getDartboartdsLeft());
 }
 
 void PlayState::updateArrows()
 {
-  std::stringstream numArrows;
-  numArrows << "x" << arrowsLeft--;
-  _overlayManager->setArrowsLeft( numArrows.str());
+  _game->shootBall();
+  _overlayManager->setBallsLeft( _game->getBallsLeft());
 }

@@ -94,7 +94,4 @@ protected:
   Ogre::Radian rotX;
   Ogre::Radian rotY;
   bool _moveRight, _moveLeft, _moveUp, _moveDown;
-
-  int dianasLeft = 5;
-  int arrowsLeft = 8;
 };

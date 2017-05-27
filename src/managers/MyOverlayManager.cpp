@@ -40,26 +40,24 @@ void MyOverlayManager::setTime(Ogre::String time)
   _overlayElement = _ogreOverlayMgr->getOverlayElement("timerTextArea");
   _overlayElement->setCaption( time );
 }
-void MyOverlayManager::setArrowsLeft(std::string arrows_left)
+void MyOverlayManager::setBallsLeft(int balls_left)
 {
   _overlayElement = _ogreOverlayMgr->getOverlayElement("arrowTextArea");
-  _overlayElement->setCaption( Ogre::String( arrows_left ) );
+  _overlayElement->setCaption( "x" + Ogre::StringConverter::toString( balls_left ) );
 }
 
-void MyOverlayManager::setDianasLeft(std::string dianas_left)
+void MyOverlayManager::setDartboardsLeft(int dartboards_left)
 {
   _overlayElement = _ogreOverlayMgr->getOverlayElement("dianaTextArea");
-  _overlayElement->setCaption( Ogre::String( dianas_left ) );
+  _overlayElement->setCaption( "x" + Ogre::StringConverter::toString( dartboards_left ) );
 }
 
-MyOverlayManager*
-MyOverlayManager::getSingletonPtr ()
+MyOverlayManager* MyOverlayManager::getSingletonPtr ()
 {
   return msSingleton;
 }
 
-MyOverlayManager&
-MyOverlayManager::getSingleton ()
+MyOverlayManager& MyOverlayManager::getSingleton ()
 {
   assert(msSingleton);
   return *msSingleton;
