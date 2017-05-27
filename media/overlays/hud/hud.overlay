@@ -40,36 +40,36 @@ HUD
   container Panel(dianaHUD)
   {
     metrics_mode pixels
-    left 50
-    top 190
-    width 91
-    height 87
+    left 0
+    top 135
+    width 297
+    height 179
     horz_align left
     vert_align top
     material dianaMaterial
 
     element TextArea(dianaTextArea) : MyTemplates/Text
     {
-      top 10
-      left 105
+      top 58
+      left 150
     }
   }
 
   container Panel(arrowHUD)
   {
     metrics_mode pixels
-    left 60
-    top 300
-    width 74
-    height 77
+    left 0
+    top 250
+    width 297
+    height 179
     horz_align left
     vert_align top
     material arrowMaterial
 
     element TextArea(arrowTextArea) : MyTemplates/Text
     {
-      top 10
-      left 95
+      top 58
+      left 150
     }
   }
 
