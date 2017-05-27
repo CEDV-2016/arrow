@@ -48,6 +48,7 @@ public:
   void createHUD();
 
   void moveCamera();
+  void detectCollision();
 
   void setPlayerName(std::string name);
 
