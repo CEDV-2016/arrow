@@ -1,6 +1,15 @@
 #include "CameraManager.hpp"
+#include "ShootManager.hpp"
+#include "MyPhysicsManager.hpp"
 
-using namespace std;
+#include <OgreBulletDynamicsRigidBody.h>
+#include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
+#include <Shapes/OgreBulletCollisionsBoxShape.h>
+#include "Shapes/OgreBulletCollisionsConvexHullShape.h"
+#include "Shapes/OgreBulletCollisionsTrimeshShape.h"
+#include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+#include "Shapes/OgreBulletCollisionsSphereShape.h"
+#include "OgreBulletCollisionsRay.h"
 
 template<> CameraManager* Ogre::Singleton<CameraManager>::msSingleton = 0;
 
@@ -60,7 +69,6 @@ CameraManager::mouseMoved
   Ogre::Real pitchAngSig = this->cameraPitchNode->getOrientation().x;
   Ogre::Real pitchDegree = rotY.valueDegrees();
 
-  cout << pitchAng << "  -> " << pitchAngSig << "  ->  " << pitchDegree << endl;
   if (((pitchAng < 179.030f && pitchAngSig >= 0) ||
  		 (pitchAng > 179.030f && pitchAngSig >= 0 && pitchDegree < 0)) ||
  		  ((pitchAng < 179.010f && pitchAngSig < 0) ||
@@ -85,6 +93,18 @@ void CameraManager::initCamera()
   Ogre::Entity* playerEntity = _sceneMgr->createEntity("Player", "Arrow.mesh");
   this->cameraYawNode->attachObject(playerEntity);
   this->cameraYawNode->setScale(0.05, 0.05, 0.05);
+
+  OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter =
+    new OgreBulletCollisions::StaticMeshToShapeConverter( playerEntity );
+  Ogre::Vector3 *vertices = (Ogre::Vector3*)trimeshConverter->getVertices();
+  int num = trimeshConverter->getVertexCount();
+  for (int i = 0; i < num; ++i)
+    vertices[i]*=0.18;
+  OgreBulletCollisions::TriangleMeshCollisionShape *dartboard_trimesh =
+    trimeshConverter->createTrimesh();
+  OgreBulletDynamics::RigidBody *physic_dartboard =
+    new OgreBulletDynamics::RigidBody( "playerBody", MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
+  physic_dartboard->setShape( this->cameraYawNode, dartboard_trimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY );
 
   // Create the camera's pitch node as a child of camera's yaw node.
   this->cameraPitchNode = this->cameraYawNode->createChildSceneNode();
