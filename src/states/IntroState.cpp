@@ -5,6 +5,7 @@
 #include "MyOverlayManager.hpp"
 #include "CameraManager.hpp"
 #include "ShootManager.hpp"
+#include "MyCollisionManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
@@ -48,6 +49,7 @@ IntroState::enter ()
   new MyOverlayManager();
   new CameraManager( _sceneMgr);
   new ShootManager( _sceneMgr);
+  new MyCollisionManager( _sceneMgr);
 
   createGUI();
   loadBackgroundImage();

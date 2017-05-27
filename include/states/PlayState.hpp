@@ -19,6 +19,7 @@
 #include "ShootManager.hpp"
 #include "MyPhysicsManager.hpp"
 #include "MyOverlayManager.hpp"
+#include "MyCollisionManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -48,7 +49,6 @@ public:
   void createHUD();
 
   void moveCamera();
-  void detectCollision();
 
   void setPlayerName(std::string name);
 
@@ -70,6 +70,7 @@ protected:
   MapManager * _mapManager;
   MyPhysicsManager * _physicsManager;
   MyOverlayManager * _overlayManager;
+  MyCollisionManager * _collisionManager;
 
   std::string _name;
   MyTimer * _timer;
