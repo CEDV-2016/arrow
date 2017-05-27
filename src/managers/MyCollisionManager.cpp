@@ -1,5 +1,6 @@
 #include "MyCollisionManager.hpp"
 #include "MyPhysicsManager.hpp"
+#include "PlayState.hpp"
 
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Shapes/OgreBulletCollisionsSphereShape.h"
@@ -57,6 +58,8 @@ void MyCollisionManager::detectCollision()
         if (node) {
   	       std::cout << node->getName() << std::endl;
   	       _sceneMgr->getRootSceneNode()->removeAndDestroyChild (node->getName());
+           PlayState* playState = PlayState::getSingletonPtr();
+           playState-> updateDianas();
         }
       }
     }

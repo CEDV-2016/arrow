@@ -1,4 +1,5 @@
 #include "ShootManager.hpp"
+#include "PlayState.hpp"
 
 #include "Shapes/OgreBulletCollisionsConvexHullShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
@@ -80,6 +81,9 @@ void ShootManager::shootBall()
   // Anadimos los objetos a las deques
   _shapes.push_back(bodyShape);
   _bodies.push_back(rigidBody);
+
+  PlayState* playState = PlayState::getSingletonPtr();
+  playState-> updateArrows();
 }
 
 ShootManager& ShootManager::getSingleton() {

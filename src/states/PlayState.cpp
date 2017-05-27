@@ -167,12 +167,26 @@ void PlayState::createScene()
 void PlayState::createHUD()
 {
   _overlayManager->createHUD();
-  _overlayManager->setPlayerName( "Pedro" );
+  _overlayManager->setPlayerName( _name );
   _overlayManager->setDianasLeft( "x5" );
-  _overlayManager->setArrowsLeft( "x4" );
+  _overlayManager->setArrowsLeft( "x8" );
 }
 
-void PlayState::setPlayerName(std::string name)
+void PlayState::setPlayerName(std::string playerName)
 {
+  _name = playerName;
+}
 
+void PlayState::updateDianas()
+{
+  std::stringstream numDianas;
+  numDianas << "x" << dianasLeft--;
+  _overlayManager->setDianasLeft( numDianas.str());
+}
+
+void PlayState::updateArrows()
+{
+  std::stringstream numArrows;
+  numArrows << "x" << arrowsLeft--;
+  _overlayManager->setArrowsLeft( numArrows.str());
 }
