@@ -24,7 +24,7 @@ public:
 protected:
 
      const std::string& _overlay_name  = "Overlays/Fader";
-     const std::string& _material_name = "Materials/OverlayMaterial";
+     const std::string& _material_name = "Materials/BlackFader";
 
      double _alpha;
      double _current_dur;

@@ -18,8 +18,8 @@ public:
 
   void setTime(Ogre::String time);
   void setPlayerName(std::string name);
-  void setArrowsLeft(std::string arrows);
-  void setDianasLeft(std::string dianas);
+  void setBallsLeft(int balls);
+  void setDartboardsLeft(int dartboards);
 
   // Inherited from Ogre::Singleton.
   static MyOverlayManager& getSingleton ();

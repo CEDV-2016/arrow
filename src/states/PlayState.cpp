@@ -16,8 +16,8 @@ template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
 PlayState::PlayState()
 {
-  _game = new Game();
   _playGUI = NULL;
+  _game = new Game();
   _timer = new MyTimer();
 }
 
@@ -167,14 +167,14 @@ void PlayState::createScene()
 void PlayState::createHUD()
 {
   _overlayManager->createHUD();
-  _overlayManager->setPlayerName( "Pedro" );
-  _overlayManager->setDianasLeft( "x5" );
-  _overlayManager->setArrowsLeft( "x4" );
+  _overlayManager->setPlayerName( _game->getPlayerName() );
+  _overlayManager->setDartboardsLeft( _game->getDartboartdsLeft() );
+  _overlayManager->setBallsLeft( _game->getBallsLeft() );
 }
 
 void PlayState::setPlayerName(std::string name)
 {
-
+  _game->setPlayerName( name );
 }
 
 void PlayState::detectCollision()
@@ -184,11 +184,11 @@ void PlayState::detectCollision()
 
   for (int i=0;i<numManifolds;i++) {
     btPersistentManifold* contactManifold =
-      bulletWorld->getDispatcher()->getManifoldByIndexInternal(i);
+    bulletWorld->getDispatcher()->getManifoldByIndexInternal(i);
     btCollisionObject* obA =
-      (btCollisionObject*)(contactManifold->getBody0());
+    (btCollisionObject*)(contactManifold->getBody0());
     btCollisionObject* obB =
-      (btCollisionObject*)(contactManifold->getBody1());
+    (btCollisionObject*)(contactManifold->getBody1());
 
     std::stringstream dartboard_id;
     for(int j=0; j<5; j++){
@@ -200,19 +200,26 @@ void PlayState::detectCollision()
       OgreBulletCollisions::Object *obOB_A = _physicsManager->getPhysicWorld()->findObject(obA);
       OgreBulletCollisions::Object *obOB_B = _physicsManager->getPhysicWorld()->findObject(obB);
 
-      if ((obOB_A == obDrain) || (obOB_B == obDrain)) {
+      if ((obOB_A == obDrain) || (obOB_B == obDrain))
+      {
         Ogre::SceneNode* node = NULL;
-        if ((obOB_A != obDrain) && (obOB_A)) {
-  	       node = obOB_A->getRootNode();
-           delete obOB_A;
+        if ((obOB_A != obDrain) && (obOB_A))
+        {
+          node = obOB_A->getRootNode();
+          delete obOB_A;
         }
-        else if ((obOB_B != obDrain) && (obOB_B)) {
-  	       node = obOB_B->getRootNode();
-           delete obOB_B;
+        else if ((obOB_B != obDrain) && (obOB_B))
+        {
+          node = obOB_B->getRootNode();
+          delete obOB_B;
         }
-        if (node) {
-  	       std::cout << node->getName() << std::endl;
-  	       _sceneMgr->getRootSceneNode()->removeAndDestroyChild (node->getName());
+        if (node)
+        {
+          std::cout << node->getName() << std::endl;
+          _sceneMgr->getRootSceneNode()->removeAndDestroyChild (node->getName());
+
+          _game->hitDartboard();
+          _overlayManager->setDartboardsLeft( _game->getDartboartdsLeft() );
         }
       }
     }
