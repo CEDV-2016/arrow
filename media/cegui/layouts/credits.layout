@@ -30,8 +30,8 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="BackButton" >
-            <Property name="Area" value="{{0,40},{0,-40},{0,324},{0,64}}" />
-            <Property name="Font" value="Jura-40" />
+            <Property name="Area" value="{{0,40},{0,-40},{0,150},{0,10}}" />
+            <Property name="Font" value="Jura-35" />
             <Property name="Text" value="[colour='FF000000']Atras" />
             <Property name="VerticalAlignment" value="Bottom" />
         </Window>

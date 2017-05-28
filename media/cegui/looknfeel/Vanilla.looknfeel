@@ -460,7 +460,7 @@
                 <Image component="RightEdge" name="Vanilla-Images/FrameRight"/>
                 <Image component="BottomEdge" name="Vanilla-Images/FrameBottom"/>
                 <Image component="Background" name="Vanilla-Images/GenericBrush"/>
-                <Colours topLeft="FF191970" bottomLeft="FF191970" topRight="FF191970" bottomRight="FF191970"/>
+                <Colours topLeft="FFFFFFFF" bottomLeft="FFFFFFFF" topRight="FFFFFFFF" bottomRight="FFFFFFFF"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="notitle_frame">

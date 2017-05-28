@@ -10,14 +10,14 @@
         <Window type="Vanilla/Button" name="ResumeButton" >
             <Property name="Area" value="{{0,0},{0,-52},{0,764},{0,52}}" />
             <Property name="Font" value="Jura-45" />
-            <Property name="Text" value="Reanudar" />
+            <Property name="Text" value="[colour='FF000000']Reanudar" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="ExitButton" >
             <Property name="Area" value="{{0,0},{0,52},{0,554},{0,156}}" />
             <Property name="Font" value="Jura-45" />
-            <Property name="Text" value="Salir" />
+            <Property name="Text" value="[colour='FF000000']Salir" />
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
