@@ -34,6 +34,8 @@ class IntroState : public Ogre::Singleton<IntroState>, public GameState
   static IntroState& getSingleton ();
   static IntroState* getSingletonPtr ();
 
+  void initializeManagers();
+
   void createGUI();
   void loadBackgroundImage();
 

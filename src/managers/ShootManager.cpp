@@ -1,5 +1,6 @@
 #include "ShootManager.hpp"
 #include "PlayState.hpp"
+#include "CharacterManager.hpp"
 
 #include "Shapes/OgreBulletCollisionsConvexHullShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
@@ -61,6 +62,8 @@ void ShootManager::initWorld()
 
 void ShootManager::shootBall()
 {
+  CharacterManager::getSingletonPtr()->shoot();
+
   Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 2);
 
   Entity *entity = _sceneMgr->createEntity("Ball" + StringConverter::toString(_numEntities), "ball.mesh");
@@ -70,7 +73,7 @@ void ShootManager::shootBall()
 
   OgreBulletCollisions::CollisionShape *bodyShape = new OgreBulletCollisions::SphereCollisionShape( 0.2 );
   OgreBulletDynamics::RigidBody *rigidBody =
-    new OgreBulletDynamics::RigidBody("rigidBody" + StringConverter::toString(_numEntities), _world);
+  new OgreBulletDynamics::RigidBody("rigidBody" + StringConverter::toString(_numEntities), _world);
 
   // Restitucion, friccion y masa
   rigidBody->setShape(node, bodyShape, 0.6, 0.6, 5.0 , position, Quaternion::IDENTITY);

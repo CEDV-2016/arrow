@@ -2,6 +2,7 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
+#include "CharacterManager.hpp"
 
 #include <OgreBulletDynamicsRigidBody.h>
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
@@ -162,9 +163,8 @@ PlayState::getSingleton ()
 void PlayState::createScene()
 {
   _mapManager->changeMap( enumerations::Maps::ROOM, false );
-  Ogre::SceneNode* nodePlayer = _sceneMgr->createSceneNode("Player");
-  nodePlayer->setScale(3.5,3.5,3.5);
-  _sceneMgr->getRootSceneNode()->addChild(nodePlayer);
+
+  CharacterManager::getSingletonPtr()->loadCharacter();
 }
 
 void PlayState::createHUD()
@@ -184,22 +184,26 @@ void PlayState::updateDartboards()
 {
   _game->hitDartboard();
   _overlayManager->setDartboardsLeft(_game->getDartboartdsLeft());
-  if ( _game->getDartboartdsLeft() == 0) {
+  if ( _game->getDartboartdsLeft() == 0)
+  {
     goToEndGame(true);
   }
 }
 
 void PlayState::updateBalls()
 {
-  if ( _game->getBallsLeft() == 0) {
+  if ( _game->getBallsLeft() == 0)
+  {
     goToEndGame(false);
-  }else {
+  }else
+  {
     _game->shootBall();
     _overlayManager->setBallsLeft( _game->getBallsLeft());
   }
 }
 
-void PlayState::goToEndGame(bool win) {
+void PlayState::goToEndGame(bool win)
+{
 
   if (win)
   {

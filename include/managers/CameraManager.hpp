@@ -23,7 +23,6 @@ public:
 
 private:
   Ogre::SceneManager* _sceneMgr;
-  Ogre::AnimationState *_animState;
   Ogre::SceneNode *cameraNode;
   Ogre::SceneNode *cameraYawNode;
   Ogre::SceneNode *cameraPitchNode;

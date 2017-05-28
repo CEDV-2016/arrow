@@ -6,6 +6,7 @@
 #include "CameraManager.hpp"
 #include "ShootManager.hpp"
 #include "MyCollisionManager.hpp"
+#include "CharacterManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
 
@@ -44,18 +45,22 @@ IntroState::enter ()
   _sceneMgr->setShadowTextureCount(30);
   _sceneMgr->setShadowTextureSize(512);
 
-  new MyPhysicsManager( _sceneMgr );
-  new MapManager( _sceneMgr, MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
-  new MyOverlayManager();
-  new CameraManager( _sceneMgr);
-  new ShootManager( _sceneMgr);
-  new MyCollisionManager( _sceneMgr);
-
+  initializeManagers();
   createGUI();
   loadBackgroundImage();
 
-
   _exitGame = false;
+}
+
+void IntroState::initializeManagers()
+{
+  new MyPhysicsManager( _sceneMgr );
+  new MapManager( _sceneMgr, MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
+  new MyOverlayManager();
+  new CameraManager( _sceneMgr );
+  new ShootManager( _sceneMgr );
+  new MyCollisionManager( _sceneMgr );
+  new CharacterManager( _sceneMgr );
 }
 
 void

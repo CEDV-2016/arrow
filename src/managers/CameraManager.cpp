@@ -1,6 +1,7 @@
 #include "CameraManager.hpp"
 #include "ShootManager.hpp"
 #include "MyPhysicsManager.hpp"
+#include "CharacterManager.hpp"
 
 #include <OgreBulletDynamicsRigidBody.h>
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
@@ -44,6 +45,11 @@ CameraManager::keyPressed
     {
       this->translateVector.x = -(this->moveScale * _last_deltaT);
     }
+
+      if(e.key == OIS::KC_W || e.key == OIS::KC_S || e.key == OIS::KC_A || e.key == OIS::KC_D)
+      {
+         CharacterManager::getSingletonPtr()->walk();
+      }
 }
 
 void
@@ -93,17 +99,19 @@ void CameraManager::initCamera()
   cam->setNearClipDistance(0.0001);
   cam->setFarClipDistance(10000);
 
-  Ogre::SceneNode *_node = _sceneMgr->getSceneNode("Player");
-  this->cameraNode = _node->createChildSceneNode();
+  Ogre::SceneNode *character_node = CharacterManager::getSingletonPtr()->getSceneNode();
+  this->cameraNode = character_node->createChildSceneNode();
   this->cameraNode->setPosition(1, 0, 0);
     // Create the camera's yaw node as a child of camera's top node.
   this->cameraYawNode = this->cameraNode->createChildSceneNode();
-  Ogre::Entity* playerEntity = _sceneMgr->createEntity("Player", "Arrow.mesh");
-  this->cameraYawNode->attachObject(playerEntity);
+
+  Ogre::Entity* character_entity = CharacterManager::getSingletonPtr()->getEntity();
+
+  this->cameraYawNode->attachObject( character_entity );
   this->cameraYawNode->setScale(0.05, 0.05, 0.05);
 
   OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter =
-    new OgreBulletCollisions::StaticMeshToShapeConverter( playerEntity );
+    new OgreBulletCollisions::StaticMeshToShapeConverter( character_entity );
   Ogre::Vector3 *vertices = (Ogre::Vector3*)trimeshConverter->getVertices();
   int num = trimeshConverter->getVertexCount();
   for (int i = 0; i < num; ++i)
