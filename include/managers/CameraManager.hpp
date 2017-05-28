@@ -34,4 +34,6 @@ private:
   Ogre::Radian rotY;
 
   Ogre::Real _last_deltaT;
+
+  bool _w_pressed, _a_pressed, _s_pressed, _d_pressed;
 };

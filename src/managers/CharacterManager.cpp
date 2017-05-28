@@ -27,7 +27,6 @@ void CharacterManager::loadCharacter()
   _walk_state->setEnabled(false);
 
   idle();
-
 }
 
 Ogre::SceneNode * CharacterManager::getSceneNode()
@@ -66,6 +65,24 @@ void CharacterManager::idle()
   _idle_state->setTimePosition(0.0);
   _idle_state->setEnabled(true);
   _idle_state->setLoop(true);
+}
+
+void CharacterManager::update(Ogre::Real deltaT)
+{
+    if (_walk_state->getEnabled() && ! _walk_state->hasEnded())
+    {
+      _walk_state->addTime( deltaT * 2.5f );
+    }
+
+    if (_shoot_state->getEnabled() && ! _shoot_state->hasEnded())
+    {
+      _shoot_state->addTime( deltaT );
+    }
+
+    if (_idle_state->getEnabled() && ! _idle_state->hasEnded())
+    {
+      _idle_state->addTime( deltaT );
+    }
 }
 
 CharacterManager& CharacterManager::getSingleton()

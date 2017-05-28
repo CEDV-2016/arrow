@@ -20,6 +20,7 @@
 #include "MyPhysicsManager.hpp"
 #include "MyOverlayManager.hpp"
 #include "MyCollisionManager.hpp"
+#include "CharacterManager.hpp"
 
 class PlayState : public Ogre::Singleton<PlayState>, public GameState
 {
@@ -53,6 +54,7 @@ public:
   void setPlayerName(std::string name);
   void updateDartboards();
   void updateBalls();
+  void updateManagers(Ogre::Real deltaT);
 
   void endGame(bool win);
 
@@ -76,7 +78,8 @@ protected:
   MyPhysicsManager * _physicsManager;
   MyOverlayManager * _overlayManager;
   MyCollisionManager * _collisionManager;
-
+  CharacterManager * _characterManager;
+  
   std::string _name;
   MyTimer * _timer;
   CameraManager * _camManager;

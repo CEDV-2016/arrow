@@ -18,7 +18,7 @@ MyPhysicsManager::MyPhysicsManager( Ogre::SceneManager * sceneMgr )
   _world->setDebugDrawer(_debugDrawer);
 
   #ifdef _DEBUG
-  _world->setShowDebugShapes(true); // paint green wires around physic bodies
+  _world->setShowDebugShapes(false); // paint green wires around physic bodies
   #endif
 }
 

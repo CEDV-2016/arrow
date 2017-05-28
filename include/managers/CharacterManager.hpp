@@ -13,6 +13,8 @@ public:
   Ogre::SceneNode * getSceneNode();
   Ogre::Entity * getEntity();
 
+  void update(Ogre::Real deltaT);
+
   void walk();
   void shoot();
   void idle();

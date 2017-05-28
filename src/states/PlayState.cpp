@@ -2,7 +2,6 @@
 #include "PauseState.hpp"
 #include "EndState.hpp"
 #include "SoundFXManager.hpp"
-#include "CharacterManager.hpp"
 
 #include <OgreBulletDynamicsRigidBody.h>
 #include <Shapes/OgreBulletCollisionsStaticPlaneShape.h>
@@ -38,6 +37,7 @@ PlayState::enter ()
   _camManager = CameraManager::getSingletonPtr();
   _shootManager = ShootManager::getSingletonPtr();
   _collisionManager = MyCollisionManager::getSingletonPtr();
+  _characterManager = CharacterManager::getSingletonPtr();
 
   _sceneMgr->clearScene(); //deleting background image
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");
@@ -83,17 +83,22 @@ PlayState::frameStarted
 (const Ogre::FrameEvent& evt)
 {
   Ogre::Real deltaT = evt.timeSinceLastFrame;
-
-  _mapManager->update( deltaT );
-  _physicsManager->update( deltaT );
-  _collisionManager->update( deltaT);
-
-  _overlayManager->setTime( _timer->getGameplayTime() );
-
-  _camManager->moveCamera( deltaT );
+  updateManagers(deltaT);
 
   return true;
 }
+
+void PlayState::updateManagers(Ogre::Real deltaT)
+{
+  _mapManager->update( deltaT );
+  _camManager->moveCamera( deltaT );
+  _physicsManager->update( deltaT );
+  _collisionManager->update( deltaT);
+  _characterManager->update( deltaT );
+
+  _overlayManager->setTime( _timer->getGameplayTime() );
+}
+
 
 bool
 PlayState::frameEnded

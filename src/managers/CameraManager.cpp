@@ -18,38 +18,44 @@ CameraManager::CameraManager( Ogre::SceneManager * sceneMgr )
 {
   _sceneMgr = sceneMgr;
 
-  moveScale = 1.15f;
+  moveScale = 0.45f;
   rotateScale = 1;
   rotX = 0;
   rotY = 0;
   translateVector = Ogre::Vector3::ZERO;
+
+  _w_pressed = _a_pressed = _s_pressed = _d_pressed = false;
 }
 
 void
 CameraManager::keyPressed
 (const OIS::KeyEvent &e)
 {
-    if(e.key == OIS::KC_W)
-    {
-      this->translateVector.z = this->moveScale * _last_deltaT;
-    }
-    if(e.key == OIS::KC_S)
-    {
-      this->translateVector.z = -(this->moveScale * _last_deltaT);
-    }
-    if(e.key == OIS::KC_A)
-    {
-      this->translateVector.x = this->moveScale * _last_deltaT;
-    }
-    if(e.key == OIS::KC_D)
-    {
-      this->translateVector.x = -(this->moveScale * _last_deltaT);
-    }
+  if(e.key == OIS::KC_W)
+  {
+    this->translateVector.z = this->moveScale * _last_deltaT;
+    _w_pressed = true;
+  }
+  if(e.key == OIS::KC_S)
+  {
+    this->translateVector.z = -(this->moveScale * _last_deltaT * 0.5);
+    _s_pressed = true;
+  }
+  if(e.key == OIS::KC_A)
+  {
+    this->translateVector.x = this->moveScale * _last_deltaT * 0.75;
+    _a_pressed = true;
+  }
+  if(e.key == OIS::KC_D)
+  {
+    this->translateVector.x = -(this->moveScale * _last_deltaT * 0.75);
+    _d_pressed = true;
+  }
 
-      if(e.key == OIS::KC_W || e.key == OIS::KC_S || e.key == OIS::KC_A || e.key == OIS::KC_D)
-      {
-         CharacterManager::getSingletonPtr()->walk();
-      }
+  if(e.key == OIS::KC_W || e.key == OIS::KC_S || e.key == OIS::KC_A || e.key == OIS::KC_D)
+  {
+    CharacterManager::getSingletonPtr()->walk();
+  }
 }
 
 void
@@ -63,6 +69,28 @@ CameraManager::keyReleased
   if(e.key == OIS::KC_A || e.key == OIS::KC_D)
   {
     this->translateVector.x = 0;
+  }
+
+  if(e.key == OIS::KC_W)
+  {
+    _w_pressed = false;
+  }
+  if(e.key == OIS::KC_S)
+  {
+    _s_pressed = false;
+  }
+  if(e.key == OIS::KC_A)
+  {
+    _a_pressed = false;
+  }
+  if(e.key == OIS::KC_D)
+  {
+    _d_pressed = false;
+  }
+
+  if (!_w_pressed && !_s_pressed && !_a_pressed && !_d_pressed)
+  {
+    CharacterManager::getSingletonPtr()->idle();
   }
 }
 
