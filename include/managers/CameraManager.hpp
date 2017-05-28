@@ -15,13 +15,13 @@ public:
   void mouseMoved (const OIS::MouseEvent &e);
 
   void initCamera();
-  void moveCamera();
+  void moveCamera(Ogre::Real deltaT);
 
   // Inherited from Ogre::Singleton.
   static CameraManager& getSingleton ();
   static CameraManager* getSingletonPtr ();
 
-protected:
+private:
   Ogre::SceneManager* _sceneMgr;
   Ogre::AnimationState *_animState;
   Ogre::SceneNode *cameraNode;
@@ -33,4 +33,6 @@ protected:
   float moveScale;
   Ogre::Radian rotX;
   Ogre::Radian rotY;
+
+  Ogre::Real _last_deltaT;
 };

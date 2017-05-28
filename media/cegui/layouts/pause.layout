@@ -2,7 +2,7 @@
 
 <GUILayout version="4" >
     <Window type="Vanilla/FrameWindow" name="PauseWindow" >
-        <Property name="Area" value="{{0,0},{0,0},{0.442188,100},{0.480556,0}}" />
+        <Property name="Area" value="{{0,0},{0,0},{0.35,100},{0.35,0}}" />
         <Property name="AspectRatio" value="1.8" />
         <Property name="VerticalAlignment" value="Centre" />
         <Property name="CloseButtonEnabled" value="false" />
