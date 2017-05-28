@@ -27,6 +27,7 @@ PlayState::enter ()
   _timer->start();
 
   _root = Ogre::Root::getSingletonPtr();
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
 
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
@@ -66,12 +67,14 @@ void
 PlayState::pause()
 {
   _timer->pause();
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
 }
 
 void
 PlayState::resume()
 {
   _timer->resume();
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
 }
 
 bool
