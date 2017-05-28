@@ -64,11 +64,13 @@ void
 CameraManager::mouseMoved
 (const OIS::MouseEvent &e)
 {
+  float scale = 0.001f;
+
   rotX = Ogre::Degree(-e.state.X.rel);
   rotY = Ogre::Degree(-e.state.Y.rel);
 
   // Yaws the camera according to the mouse relative movement.
-	this->cameraYawNode->yaw(this->rotX);
+	this->cameraYawNode->yaw(this->rotX * scale / _last_deltaT);
 
   // Pitches the camera according to the mouse relative movement.
 	Ogre::Real pitchAng = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
@@ -79,7 +81,7 @@ CameraManager::mouseMoved
  		 (pitchAng > 179.030f && pitchAngSig >= 0 && pitchDegree < 0)) ||
  		  ((pitchAng < 179.010f && pitchAngSig < 0) ||
       (pitchAng > 179.010f && pitchAngSig < 0 && pitchDegree > 0))) {
-	 			this->cameraPitchNode->pitch(this->rotY);
+	 			this->cameraPitchNode->pitch(this->rotY * scale / _last_deltaT);
 	 }
 }
 
