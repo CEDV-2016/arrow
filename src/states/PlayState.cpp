@@ -200,6 +200,16 @@ void PlayState::updateBalls()
 }
 
 void PlayState::goToEndGame(bool win) {
+
+  if (win)
+  {
+    SoundFXManager::getSingletonPtr()->load("arrow_yes.wav")->play();
+  }
+  else
+  {
+    SoundFXManager::getSingletonPtr()->load("arrow_ouch.wav")->play();
+  }
+
   EndState* endState = EndState::getSingletonPtr();
   int points = 5 - _game->getDartboartdsLeft();
   endState-> setData(win, _game->getPlayerName(), points);

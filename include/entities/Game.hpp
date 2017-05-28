@@ -16,6 +16,9 @@ public:
   int getDartboartdsLeft();
   int getBallsLeft();
   std::string getPlayerName();
+
+  void win();
+  void lose();
   
 private:
 
