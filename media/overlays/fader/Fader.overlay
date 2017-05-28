@@ -8,6 +8,6 @@ Overlays/Fader
     top 0
     width 1
     height 1
-    material Materials/WhiteFader
+    material Materials/BlackFader
   }
 }
