@@ -37,29 +37,32 @@ void MyCollisionManager::detectCollision()
 
     std::stringstream dartboard_id;
     for(int j=0; j<5; j++){
-      dartboard_id.str("");
-      dartboard_id << "Dartboard" << j;
-      Ogre::SceneNode* drain = _sceneMgr->getSceneNode(dartboard_id.str());
+      if (!_dartboard[j]) {
+        dartboard_id.str("");
+        dartboard_id << "Dartboard" << j;
+        Ogre::SceneNode* drain = _sceneMgr->getSceneNode(dartboard_id.str());
 
-      OgreBulletCollisions::Object *obDrain = _world->findObject(drain);
-      OgreBulletCollisions::Object *obOB_A = _world->findObject(obA);
-      OgreBulletCollisions::Object *obOB_B = _world->findObject(obB);
+        OgreBulletCollisions::Object *obDrain = _world->findObject(drain);
+        OgreBulletCollisions::Object *obOB_A = _world->findObject(obA);
+        OgreBulletCollisions::Object *obOB_B = _world->findObject(obB);
 
-      if ((obOB_A == obDrain) || (obOB_B == obDrain)) {
-        Ogre::SceneNode* node = NULL;
-        if ((obOB_A != obDrain) && (obOB_A)) {
-  	       node = obOB_A->getRootNode();
-           delete obOB_A;
-        }
-        else if ((obOB_B != obDrain) && (obOB_B)) {
-  	       node = obOB_B->getRootNode();
-           delete obOB_B;
-        }
-        if (node) {
-  	       std::cout << node->getName() << std::endl;
-  	       _sceneMgr->getRootSceneNode()->removeAndDestroyChild (node->getName());
-           PlayState* playState = PlayState::getSingletonPtr();
-           playState-> updateDartboards();
+        if ((obOB_A == obDrain) || (obOB_B == obDrain)) {
+          Ogre::SceneNode* node = NULL;
+          if ((obOB_A == obDrain) && (obOB_A)) {
+    	       node = obOB_A->getRootNode();
+             delete obOB_A;
+          }
+          else if ((obOB_B == obDrain) && (obOB_B)) {
+    	       node = obOB_B->getRootNode();
+             delete obOB_B;
+          }
+          if (node) {
+    	       std::cout << node->getName() << std::endl;
+    	       _sceneMgr->getRootSceneNode()->removeAndDestroyChild (node->getName());
+             _dartboard[j] = true;
+             PlayState* playState = PlayState::getSingletonPtr();
+             playState-> updateDartboards();
+          }
         }
       }
     }

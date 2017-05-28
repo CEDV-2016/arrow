@@ -22,6 +22,7 @@ public:
 private:
   Ogre::SceneManager * _sceneMgr;
   OgreBulletDynamics::DynamicsWorld * _world;
+  bool _dartboard[5] = { false };
 
   void detectCollision();
 };

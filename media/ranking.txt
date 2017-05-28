@@ -2,9 +2,9 @@ Jotis
 5
 Pedro
 5
+Arrow
+4
 Maria
 4
 Arrow
-3
-Concha
 3
