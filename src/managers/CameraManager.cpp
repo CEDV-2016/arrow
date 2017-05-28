@@ -17,7 +17,7 @@ CameraManager::CameraManager( Ogre::SceneManager * sceneMgr )
 {
   _sceneMgr = sceneMgr;
 
-  moveScale = 0.01f;
+  moveScale = 1.15f;
   rotateScale = 1;
   rotX = 0;
   rotY = 0;
@@ -28,17 +28,21 @@ void
 CameraManager::keyPressed
 (const OIS::KeyEvent &e)
 {
-    if(e.key == OIS::KC_UP){
-      this->translateVector.z = this->moveScale;
+    if(e.key == OIS::KC_W)
+    {
+      this->translateVector.z = this->moveScale * _last_deltaT;
     }
-    if(e.key == OIS::KC_DOWN){
-      this->translateVector.z = -(this->moveScale);
+    if(e.key == OIS::KC_S)
+    {
+      this->translateVector.z = -(this->moveScale * _last_deltaT);
     }
-    if(e.key == OIS::KC_LEFT){
-      this->translateVector.x = this->moveScale;
+    if(e.key == OIS::KC_A)
+    {
+      this->translateVector.x = this->moveScale * _last_deltaT;
     }
-    if(e.key == OIS::KC_RIGHT){
-      this->translateVector.x = -(this->moveScale);
+    if(e.key == OIS::KC_D)
+    {
+      this->translateVector.x = -(this->moveScale * _last_deltaT);
     }
 }
 
@@ -46,10 +50,12 @@ void
 CameraManager::keyReleased
 (const OIS::KeyEvent &e)
 {
-  if(e.key == OIS::KC_UP || e.key == OIS::KC_DOWN){
+  if(e.key == OIS::KC_W || e.key == OIS::KC_S)
+  {
     this->translateVector.z = 0;
   }
-  if(e.key == OIS::KC_LEFT || e.key == OIS::KC_RIGHT){
+  if(e.key == OIS::KC_A || e.key == OIS::KC_D)
+  {
     this->translateVector.x = 0;
   }
 }
@@ -58,11 +64,13 @@ void
 CameraManager::mouseMoved
 (const OIS::MouseEvent &e)
 {
+  float scale = 0.001f;
+
   rotX = Ogre::Degree(-e.state.X.rel);
   rotY = Ogre::Degree(-e.state.Y.rel);
 
   // Yaws the camera according to the mouse relative movement.
-	this->cameraYawNode->yaw(this->rotX);
+	this->cameraYawNode->yaw(this->rotX * scale / _last_deltaT);
 
   // Pitches the camera according to the mouse relative movement.
 	Ogre::Real pitchAng = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
@@ -73,7 +81,7 @@ CameraManager::mouseMoved
  		 (pitchAng > 179.030f && pitchAngSig >= 0 && pitchDegree < 0)) ||
  		  ((pitchAng < 179.010f && pitchAngSig < 0) ||
       (pitchAng > 179.010f && pitchAngSig < 0 && pitchDegree > 0))) {
-	 			this->cameraPitchNode->pitch(this->rotY);
+	 			this->cameraPitchNode->pitch(this->rotY * scale / _last_deltaT);
 	 }
 }
 
@@ -99,9 +107,10 @@ void CameraManager::initCamera()
   Ogre::Vector3 *vertices = (Ogre::Vector3*)trimeshConverter->getVertices();
   int num = trimeshConverter->getVertexCount();
   for (int i = 0; i < num; ++i)
+  {
     vertices[i]*=0.18;
-  OgreBulletCollisions::TriangleMeshCollisionShape *dartboard_trimesh =
-    trimeshConverter->createTrimesh();
+  }
+  OgreBulletCollisions::TriangleMeshCollisionShape *dartboard_trimesh = trimeshConverter->createTrimesh();
   OgreBulletDynamics::RigidBody *physic_dartboard =
     new OgreBulletDynamics::RigidBody( "playerBody", MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
   physic_dartboard->setShape( this->cameraYawNode, dartboard_trimesh, 0.8, 0.95, 0, Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY );
@@ -112,11 +121,10 @@ void CameraManager::initCamera()
   this->cameraPitchNode->yaw(Ogre::Degree(179));
 }
 
-void CameraManager::moveCamera()
+void CameraManager::moveCamera(Ogre::Real deltaT)
 {
-  this->cameraNode->translate(this->cameraYawNode->getOrientation() *
-                             translateVector,
-                             Ogre::SceneNode::TS_LOCAL);
+  this->cameraNode->translate(this->cameraYawNode->getOrientation() * translateVector, Ogre::SceneNode::TS_LOCAL);
+  _last_deltaT = deltaT;
 }
 
 CameraManager& CameraManager::getSingleton() {

@@ -89,7 +89,7 @@ PlayState::frameStarted
 
   _overlayManager->setTime( _timer->getGameplayTime() );
 
-  _camManager->moveCamera();
+  _camManager->moveCamera( deltaT );
 
   return true;
 }
