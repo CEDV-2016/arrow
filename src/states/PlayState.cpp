@@ -184,10 +184,24 @@ void PlayState::updateDartboards()
 {
   _game->hitDartboard();
   _overlayManager->setDartboardsLeft(_game->getDartboartdsLeft());
+  if ( _game->getDartboartdsLeft() == 0) {
+    goToEndGame(true);
+  }
 }
 
 void PlayState::updateBalls()
 {
-  _game->shootBall();
-  _overlayManager->setBallsLeft( _game->getBallsLeft());
+  if ( _game->getBallsLeft() == 0) {
+    goToEndGame(false);
+  }else {
+    _game->shootBall();
+    _overlayManager->setBallsLeft( _game->getBallsLeft());
+  }
+}
+
+void PlayState::goToEndGame(bool win) {
+  EndState* endState = EndState::getSingletonPtr();
+  int points = 5 - _game->getDartboartdsLeft();
+  endState-> setData(win, _game->getPlayerName(), points);
+  pushState(endState);
 }

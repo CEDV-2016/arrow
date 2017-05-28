@@ -35,5 +35,5 @@ int Game::getDartboartdsLeft()
 
 int Game::getBallsLeft()
 {
-  return _dartboards_left;
+  return _balls_left;
 }

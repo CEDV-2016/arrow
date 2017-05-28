@@ -56,6 +56,9 @@ public:
 
   void endGame(bool win);
 
+private:
+  void goToEndGame(bool win);
+
 protected:
   Ogre::Root* _root;
   Ogre::SceneManager* _sceneMgr;
