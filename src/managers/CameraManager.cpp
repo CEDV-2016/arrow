@@ -87,7 +87,7 @@ void CameraManager::initCamera()
 
   Ogre::SceneNode *_node = _sceneMgr->getSceneNode("Player");
   this->cameraNode = _node->createChildSceneNode();
-  this->cameraNode->setPosition(0, 0, 0);
+  this->cameraNode->setPosition(1, 0, 0);
     // Create the camera's yaw node as a child of camera's top node.
   this->cameraYawNode = this->cameraNode->createChildSceneNode();
   Ogre::Entity* playerEntity = _sceneMgr->createEntity("Player", "Arrow.mesh");
