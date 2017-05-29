@@ -16,7 +16,6 @@ template<> PlayState* Ogre::Singleton<PlayState>::msSingleton = 0;
 
 PlayState::PlayState()
 {
-  _playGUI = NULL;
   _game = new Game();
   _timer = new MyTimer();
 }
@@ -31,6 +30,7 @@ PlayState::enter ()
 
   _sceneMgr = _root->getSceneManager("SceneManager");
   _camera = _sceneMgr->getCamera("MainCamera");
+
   _mapManager = MapManager::getSingletonPtr();
   _overlayManager = MyOverlayManager::getSingletonPtr();
   _physicsManager = MyPhysicsManager::getSingletonPtr();
@@ -59,7 +59,7 @@ void
 PlayState::exit ()
 {
   _mapManager->destroyAllMaps();
-  _playGUI->hide();
+  _overlayManager->hideHUD();
   _sceneMgr->clearScene();
   _root->getAutoCreatedWindow()->removeAllViewports();
 }

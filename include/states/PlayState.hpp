@@ -72,14 +72,13 @@ protected:
   OIS::InputManager* _inputManager;
   OIS::Keyboard* _keyboard;
   OIS::Mouse* _mouse;
-  CEGUI::Window* _playGUI, *_nameView, *_scoreView, *_life1View, *_life2View, *_life3View;
   Game *_game;
   MapManager * _mapManager;
   MyPhysicsManager * _physicsManager;
   MyOverlayManager * _overlayManager;
   MyCollisionManager * _collisionManager;
   CharacterManager * _characterManager;
-  
+
   std::string _name;
   MyTimer * _timer;
   CameraManager * _camManager;

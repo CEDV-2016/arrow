@@ -14,7 +14,7 @@ public:
   ~MyOverlayManager();
 
   void createHUD();
-  void destroyHUD();
+  void hideHUD();
 
   void setTime(Ogre::String time);
   void setPlayerName(std::string name);

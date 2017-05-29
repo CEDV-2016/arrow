@@ -68,7 +68,16 @@ void RoomMap::destroy()
   for (int i=1; i<=5; i++)
   {
     dartboard_name << "Dartboard" << i;
-    _sceneMgr->destroySceneNode( _sceneMgr->getSceneNode( dartboard_name.str() ) );
+
+    // http://www.ogre3d.org/forums/viewtopic.php?f=2&t=15994
+    try
+    {
+      _sceneMgr->destroySceneNode( dartboard_name.str() );
+    }
+    catch (Ogre::Exception ex)
+    {
+      // The scenenode doesn't exist
+    }
     dartboard_name.str("");
   }
 }

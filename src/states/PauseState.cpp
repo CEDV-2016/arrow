@@ -82,7 +82,7 @@ PauseState::mouseReleased
 PauseState*
 PauseState::getSingletonPtr ()
 {
-return msSingleton;
+  return msSingleton;
 }
 
 PauseState&
@@ -121,6 +121,6 @@ bool PauseState::back(const CEGUI::EventArgs &e)
 
 bool PauseState::exitPause(const CEGUI::EventArgs &e)
 {
-  _exitGame = true;
+  restartState(IntroState::getSingletonPtr());
   return true;
 }

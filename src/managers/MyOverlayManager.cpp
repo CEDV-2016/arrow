@@ -28,6 +28,10 @@ void MyOverlayManager::createHUD()
   _overlay->show();
 }
 
+void MyOverlayManager::hideHUD()
+{
+  _overlay->hide();
+}
 
 void MyOverlayManager::setPlayerName(std::string name)
 {

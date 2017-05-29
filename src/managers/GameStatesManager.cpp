@@ -24,8 +24,8 @@ GameStatesManager::~GameStatesManager ()
     delete _root;
   }
 
-  OGRE_DELETE _trackManager;
-  OGRE_DELETE _pSoundFXManager;
+  // OGRE_DELETE _trackManager;
+  // OGRE_DELETE _pSoundFXManager;
 }
 
 void
@@ -47,8 +47,8 @@ GameStatesManager::start
   _inputMgr = new InputManager;
   _inputMgr->initialise(_renderWindow);
 
-  // _mainTrack = _trackManager->load("Winding-Down.ogg");
-  // _mainTrack->play();
+  _mainTrack = _trackManager->load("Winding-Down.ogg");
+  _mainTrack->play();
 
   // Registro como key y mouse listener...
   _inputMgr->addKeyListener(this, "GameStatesManager");

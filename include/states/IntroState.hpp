@@ -8,12 +8,20 @@
 #include <CEGUI.h>
 #include <RendererModules/Ogre/Renderer.h>
 
+#include "MapManager.hpp"
+#include "MyPhysicsManager.hpp"
+#include "MyOverlayManager.hpp"
+#include "CameraManager.hpp"
+#include "ShootManager.hpp"
+#include "MyCollisionManager.hpp"
+#include "CharacterManager.hpp"
+
 #include "GameState.hpp"
 
 class IntroState : public Ogre::Singleton<IntroState>, public GameState
 {
  public:
-  IntroState() {}
+  IntroState();
 
   void enter ();
   void exit ();
@@ -54,6 +62,14 @@ class IntroState : public Ogre::Singleton<IntroState>, public GameState
 
   Ogre::SceneNode *_backgroundNode;
   Ogre::Rectangle2D *_rect;
+
+  MyPhysicsManager* _physicsMgr;
+  MapManager* _mapMgr;
+  MyOverlayManager* _overlayMgr;
+  CameraManager* _cameraMgr;
+  ShootManager* _shootMgr;
+  MyCollisionManager* _collisionMgr;
+  CharacterManager* _characterMgr;
 
   bool _exitGame;
 };

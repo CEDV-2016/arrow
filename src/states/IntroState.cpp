@@ -1,14 +1,17 @@
 #include "IntroState.hpp"
 #include "MainState.hpp"
-#include "MapManager.hpp"
-#include "MyPhysicsManager.hpp"
-#include "MyOverlayManager.hpp"
-#include "CameraManager.hpp"
-#include "ShootManager.hpp"
-#include "MyCollisionManager.hpp"
-#include "CharacterManager.hpp"
 
 template<> IntroState* Ogre::Singleton<IntroState>::msSingleton = 0;
+
+IntroState::IntroState():
+  _physicsMgr(NULL),
+  _mapMgr(NULL),
+  _overlayMgr(NULL),
+  _cameraMgr(NULL),
+  _shootMgr(NULL),
+  _collisionMgr(NULL),
+  _characterMgr(NULL)
+{}
 
 void
 IntroState::enter ()
@@ -41,7 +44,6 @@ IntroState::enter ()
 
   _sceneMgr->setAmbientLight( Ogre::ColourValue(1, 1, 1) );
   _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-  // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
   _sceneMgr->setShadowTextureCount(30);
   _sceneMgr->setShadowTextureSize(512);
 
@@ -54,13 +56,34 @@ IntroState::enter ()
 
 void IntroState::initializeManagers()
 {
-  new MyPhysicsManager( _sceneMgr );
-  new MapManager( _sceneMgr, MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
-  new MyOverlayManager();
-  new CameraManager( _sceneMgr );
-  new ShootManager( _sceneMgr );
-  new MyCollisionManager( _sceneMgr );
-  new CharacterManager( _sceneMgr );
+  if (_physicsMgr == NULL)
+  {
+    _physicsMgr = new MyPhysicsManager( _sceneMgr );
+  }
+  if (_mapMgr == NULL)
+  {
+    _mapMgr = new MapManager( _sceneMgr, MyPhysicsManager::getSingletonPtr()->getPhysicWorld() );
+  }
+  if (_overlayMgr == NULL)
+  {
+    _overlayMgr = new MyOverlayManager();
+  }
+  if (_cameraMgr == NULL)
+  {
+    _cameraMgr = new CameraManager( _sceneMgr );
+  }
+  if (_shootMgr == NULL)
+  {
+    _shootMgr = new ShootManager( _sceneMgr );
+  }
+  if (_collisionMgr == NULL)
+  {
+    _collisionMgr = new MyCollisionManager( _sceneMgr );
+  }
+  if (_characterMgr == NULL)
+  {
+    _characterMgr = new CharacterManager( _sceneMgr );
+  }
 }
 
 void
@@ -80,6 +103,7 @@ IntroState::pause ()
 void
 IntroState::resume ()
 {
+  Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->show();
   _intro->show();
 }
 
@@ -161,13 +185,12 @@ void IntroState::createGUI()
   {
     _intro = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("splash.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_intro);
-
-    Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->show();
   }
   else
   {
     _intro->show();
   }
+  Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->show();
 }
 
 void IntroState::loadBackgroundImage()

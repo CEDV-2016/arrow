@@ -96,28 +96,33 @@ EndState::getSingleton ()
 
 void EndState::createGUI()
 {
-  if(_endGUI == NULL){
+  if(_endGUI == NULL)
+  {
     //Config Window
     _endGUI = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("endGame.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_endGUI);
 
     //Config buttons
     CEGUI::Window* resumeButton = _endGUI->getChild("endWinButton");
-    resumeButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-      CEGUI::Event::Subscriber(&EndState::finish, this));
+    resumeButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&EndState::finish, this));
     _titleView = _endGUI->getChild("winLabel");
     _nameView = _endGUI->getChild("nameLabel");
     _pointsView = _endGUI->getChild("pointsLabel");
 
     //Set data
-    if (_win) {
+    if (_win)
+    {
       _titleView->setText("Has ganado");
-    }else {
+    }
+    else
+    {
       _titleView->setText("Has perdido");
     }
     _nameView->setText(_name);
     _pointsView->setText(std::to_string(_points));
-  } else{
+  }
+  else
+  {
     _nameView->setText(_name);
     _pointsView->setText(std::to_string(_points));
     _endGUI->show();
@@ -126,7 +131,8 @@ void EndState::createGUI()
 
 bool EndState::finish(const CEGUI::EventArgs &e)
 {
-  _exitGame = true;
+  popState();
+  restartState(IntroState::getSingletonPtr());
   return true;
 }
 
