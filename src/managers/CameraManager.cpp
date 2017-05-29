@@ -104,32 +104,32 @@ CameraManager::mouseMoved
   rotY = Ogre::Degree(-e.state.Y.rel);
 
   // Yaws the camera according to the mouse relative movement.
-	this->cameraYawNode->yaw(this->rotX * scale / _last_deltaT);
+	this->cameraYawNode->yaw(this->rotX );//* scale / _last_deltaT);
 
   // Pitches the camera according to the mouse relative movement.
 	Ogre::Real pitchAng = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
   Ogre::Real pitchAngSig = this->cameraPitchNode->getOrientation().x;
   Ogre::Real pitchDegree = rotY.valueDegrees();
 
-  if (((pitchAng < 179.030f && pitchAngSig >= 0) ||
- 		 (pitchAng > 179.030f && pitchAngSig >= 0 && pitchDegree < 0)) ||
- 		  ((pitchAng < 179.010f && pitchAngSig < 0) ||
-      (pitchAng > 179.010f && pitchAngSig < 0 && pitchDegree > 0))) {
-	 			this->cameraPitchNode->pitch(this->rotY * scale / _last_deltaT);
+  if (((pitchAng < 179.040f && pitchAngSig >= 0) ||
+ 		 (pitchAng > 179.040f && pitchAngSig >= 0 && pitchDegree < 0)) ||
+ 		  ((pitchAng < 179.020f && pitchAngSig < 0) ||
+      (pitchAng > 179.020f && pitchAngSig < 0 && pitchDegree > 0))) {
+	 			this->cameraPitchNode->pitch(this->rotY);//* scale / _last_deltaT);
 	 }
 }
 
 void CameraManager::initCamera()
 {
   Ogre::Camera* cam = _sceneMgr->getCamera("MainCamera");
-  cam->setPosition( Ogre::Vector3(0, 1, 3) );
+  cam->setPosition( Ogre::Vector3(0, 1.5, 4) );
   //_sceneMgr->getCamera("MainCamera")->lookAt( Ogre::Vector3(-5, 5, -9) );
   cam->setNearClipDistance(0.0001);
   cam->setFarClipDistance(10000);
 
   Ogre::SceneNode *character_node = CharacterManager::getSingletonPtr()->getSceneNode();
   this->cameraNode = character_node->createChildSceneNode();
-  this->cameraNode->setPosition(1, 0, 0);
+  this->cameraNode->setPosition(1, 0, -1);
     // Create the camera's yaw node as a child of camera's top node.
   this->cameraYawNode = this->cameraNode->createChildSceneNode();
 

@@ -121,6 +121,6 @@ bool PauseState::back(const CEGUI::EventArgs &e)
 
 bool PauseState::exitPause(const CEGUI::EventArgs &e)
 {
-  restartState(IntroState::getSingletonPtr());
+  _exitGame = true;
   return true;
 }

@@ -19,7 +19,7 @@ public:
 
   void win();
   void lose();
-  
+
 private:
 
   static const int NUM_DARTBOARDS = 5;

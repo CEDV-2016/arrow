@@ -126,8 +126,7 @@ void EndState::createGUI()
 
 bool EndState::finish(const CEGUI::EventArgs &e)
 {
-  this->popState();
-  restartState(IntroState::getSingletonPtr());
+  _exitGame = true;
   return true;
 }
 
