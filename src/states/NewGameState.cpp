@@ -138,6 +138,7 @@ bool NewGameState::newGame(const CEGUI::EventArgs &e)
   startButtAnimInstance->setTargetWindow(_nameText);
   startButtAnimInstance->start();*/
   _newgameGUI->hide();
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
   MapManager::getSingletonPtr()->fadeOut( std::bind(&NewGameState::changeState, this) );
   return true;
 }

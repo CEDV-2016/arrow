@@ -28,7 +28,7 @@ IntroState::enter ()
   {
     _camera = _sceneMgr->createCamera("MainCamera");
   }
-
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
   _viewport = _root->getAutoCreatedWindow()->addViewport(_camera);
   _viewport->setBackgroundColour(Ogre::ColourValue(0.3, 0.8, 0.8));
 
@@ -96,6 +96,7 @@ IntroState::exit()
 void
 IntroState::pause ()
 {
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
   Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->hide();
   _intro->hide();
 }
@@ -103,6 +104,7 @@ IntroState::pause ()
 void
 IntroState::resume ()
 {
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
   Ogre::OverlayManager::getSingletonPtr()->getByName("SplashOverlay")->show();
   _intro->show();
 }
